@@ -12,6 +12,8 @@ export default function Home() {
   const [isScrolling, setIsScrolling] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const name = "Nevin M Noby";
+  const [displayedName, setDisplayedName] = useState(" ".repeat(name.length));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,6 +47,22 @@ export default function Home() {
       document.body.removeChild(script);
     };
   }, []);
+
+  useEffect(() => {
+    const totalDuration = 10000; // 10 seconds
+    const intervalDuration = totalDuration / name.length;
+    let i = 0;
+    const shuffledName = name.split('').sort(() => Math.random() - 0.5).join('');
+    let tempName = shuffledName.split('');
+    
+    const interval = setInterval(() => {
+      tempName[i] = name[i];
+      setDisplayedName(tempName.join(''));
+      i++;
+      if (i === name.length) clearInterval(interval);
+    }, intervalDuration);
+    return () => clearInterval(interval);
+  }, [name]);
 
   return (
     <div className={`min-h-screen flex flex-col ${darkMode ? "bg-gray-900 text-white" : "bg-gray-50"} transition-colors duration-300`}>
@@ -115,14 +133,31 @@ export default function Home() {
                   className="object-cover"
                 />
               </motion.div>
-              <h2 className="text-4xl font-bold text-purple-600 mt-4">Nevin M Noby</h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mt-2">
+              <motion.h2
+                className="text-4xl font-bold text-purple-600 mt-4"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1 }}
+              >
+                I am {displayedName}
+              </motion.h2>
+              <motion.p
+                className="text-lg text-gray-600 dark:text-gray-300 mt-2"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1, delay: 1 }}
+              >
                 Full-Stack Developer | AI & IoT Enthusiast
-              </p>
-              <div className="flex items-center space-x-3 mt-3">
+              </motion.p>
+              <motion.div
+                className="flex items-center space-x-3 mt-3"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, delay: 1.5 }}
+              >
                 <FaMapMarkerAlt className="text-purple-500" />
                 <span className="text-gray-600 dark:text-gray-300">Kottayam,Kerela,India</span>
-              </div>
+              </motion.div>
             </div>
 
             {/* Skills Section */}
