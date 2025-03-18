@@ -6,6 +6,13 @@ import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaMapMarkerAlt, FaGithubAl
 import { SiJavascript, SiPython, SiReact, SiCplusplus, SiMongodb, SiMysql, SiDocker, SiGit } from "react-icons/si";
 import { FaJava } from "react-icons/fa"; // ✅ Correct import path
 import Link from "next/link";
+import { Link as ScrollLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+import Projects from "../components/Projects";
+import Git from "../components/Git";
+import Services from "../components/Services";
+import TestimonialPage from "../components/TestimonialPage";
+import BlogPage from "../components/BlogPage";
+import ContactPage from "../components/ContactPage";
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("about");
@@ -18,7 +25,7 @@ export default function Home() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolling(true);
-      const sections = ["about", "projects", "skills", "services", "testimonials", "blog", "contact"];
+      const sections = ["about", "projects", "github", "services", "testimonials", "blog", "contact"];
       
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -77,14 +84,20 @@ export default function Home() {
 
           <nav className="hidden md:block">
             <ul className="flex space-x-6">
-              {["About", "Projects", "Skills", "Services", "Testimonials", "Blog", "Contact"].map((item) => (
+              {["About", "Projects", "GitHub", "Services", "Testimonials", "Blog", "Contact"].map((item) => (
                 <li key={item}>
-                  <a href={`#${item.toLowerCase()}`} className={`${activeSection === item.toLowerCase() ? "text-purple-600 font-medium" : darkMode ? "text-gray-300" : "text-gray-600"} hover:text-purple-500 transition-colors px-2 py-1 relative`}>
+                  <ScrollLink  
+                    to={item.toLowerCase()}
+                    smooth={true}
+                    duration={500}
+                    className={`${activeSection === item.toLowerCase() ? "text-purple-600 font-medium" : darkMode ? "text-gray-300" : "text-gray-600"} hover:text-purple-500 transition-colors px-2 py-1 relative`}
+                    onSetActive={() => setActiveSection(item.toLowerCase())}
+                  >
                     {item}
                     {activeSection === item.toLowerCase() && (
                       <motion.div layoutId="navIndicator" className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600" />
                     )}
-                  </a>
+                  </ScrollLink>
                 </li>
               ))}
             </ul>
@@ -109,79 +122,90 @@ export default function Home() {
       </header>
 
       <main className="flex-1 container mx-auto mt-16 p-6">
-        <motion.section
-          id="about"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="py-20 text-center"
-        >
-          <div className="container mx-auto px-6">
-            {/* Profile Section */}
-            <div className="flex flex-col items-center">
-              <motion.div
-                className="w-32 h-32 rounded-full overflow-hidden shadow-lg border-4 border-purple-500"
-                initial={{ scale: 0.8 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Image
-                  src="/profile.jpg"
-                  alt="Profile Picture"
-                  width={128}
-                  height={128}
-                  className="object-cover"
-                />
-              </motion.div>
-              <motion.h2
-                className="text-4xl font-bold text-purple-600 mt-4"
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1 }}
-              >
-                I am {displayedName}
-              </motion.h2>
-              <motion.p
-                className="text-lg text-gray-600 dark:text-gray-300 mt-2"
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1, delay: 1 }}
-              >
-                Full-Stack Developer | AI & IoT Enthusiast
-              </motion.p>
-              <motion.div
-                className="flex items-center space-x-3 mt-3"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, delay: 1.5 }}
-              >
-                <FaMapMarkerAlt className="text-purple-500" />
-                <span className="text-gray-600 dark:text-gray-300">Kottayam,Kerela,India</span>
-              </motion.div>
-            </div>
+        <Element name="about">
+          <motion.section
+            id="about"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="py-20 text-center"
+          >
+            <div className="container mx-auto px-6">
+              {/* Profile Section */}
+              <div className="flex flex-col items-center">
+                <motion.div
+                  className="w-32 h-32 rounded-full overflow-hidden shadow-lg border-4 border-purple-500"
+                  initial={{ scale: 0.8 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Image
+                    src="/profile.jpg"
+                    alt="Profile Picture"
+                    width={128}
+                    height={128}
+                    className="object-cover"
+                  />
+                </motion.div>
+                <motion.h2
+                  className="text-4xl font-bold text-purple-600 mt-4"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1 }}
+                >
+                  I am {displayedName}
+                </motion.h2>
+                <motion.p
+                  className="text-lg text-gray-600 dark:text-gray-300 mt-2"
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 1, delay: 1 }}
+                >
+                  Full-Stack Developer | AI & IoT Enthusiast
+                </motion.p>
+                <motion.div
+                  className="flex items-center space-x-3 mt-3"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1, delay: 1.5 }}
+                >
+                  <FaMapMarkerAlt className="text-purple-500" />
+                  <span className="text-gray-600 dark:text-gray-300">Kottayam,Kerela,India</span>
+                </motion.div>
+              </div>
 
-            {/* Skills Section */}
-            <div className="mt-12">
-              <h3 className="text-3xl font-semibold text-purple-600">Skills & Technologies</h3>
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6 mt-6">
-                {[SiJavascript, SiPython, SiReact, FaJava, SiCplusplus, SiMongodb, SiMysql, SiDocker, SiGit].map((Icon, index) => (
-                  <motion.div
-                    key={index}
-                    className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md flex justify-center items-center"
-                    whileHover={{ scale: 1.1 }}
-                  >
-                    <Icon className="text-purple-500 text-4xl" />
-                  </motion.div>
-                ))}
+              {/* Skills Section */}
+              <div className="mt-12">
+                <h3 className="text-3xl font-semibold text-purple-600">Skills & Technologies</h3>
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6 mt-6">
+                  {[SiJavascript, SiPython, SiReact, FaJava, SiCplusplus, SiMongodb, SiMysql, SiDocker, SiGit].map((Icon, index) => (
+                    <motion.div
+                      key={index}
+                      className={`p-4 ${darkMode ? "bg-white" : "bg-gray-800"} rounded-lg shadow-md flex justify-center items-center`}
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      <Icon className={`${darkMode ? "text-gray-800" : "text-white"} text-4xl`} />
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </div>
-
-            {/* Experience & Projects Section */}
-            <div className="mt-12">
+          </motion.section>
+        </Element>
+        <Git isDark={!darkMode} />
+        <Element name="projects">
+          <motion.section
+            id="projects"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="py-20 text-center"
+          >
+            <div className="container mx-auto px-6">
               <h3 className="text-3xl font-semibold text-purple-600">Experience & Projects</h3>
               
               <div className="grid md:grid-cols-2 gap-8 mt-6">
-                {[1, 2].map((project) => (
+                {/* {[1, 2].map((project) => (
                   <motion.div
                     key={project}
                     className="p-6 bg-white dark:bg-gray-800 shadow-lg rounded-lg"
@@ -191,82 +215,97 @@ export default function Home() {
                     <p className="text-gray-600 dark:text-gray-300 mt-2">
                       Brief description of your project or experience.
                     </p>
+                    
                   </motion.div>
-                ))}
+                ))} */}
               </div>
+                
+              <Projects />
               <Link href="/Showcase">
                 <button className="mt-4 px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
                   Load More...
                 </button>
               </Link>
             </div>
+          </motion.section>
+        </Element>
 
-            {/* Education & Certifications */}
-            <div className="mt-12">
-              <h3 className="text-3xl font-semibold text-purple-600">Education & Certifications</h3>
-              <div className="mt-6 space-y-4">
-                <motion.div
-                  className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <h4 className="text-xl font-bold text-gray-800 dark:text-white">B.Tech in Computer Science</h4>
-                  <p className="text-gray-600 dark:text-gray-300">Your University (Year)</p>
-                </motion.div>
-                <motion.div
-                  className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <h4 className="text-xl font-bold text-gray-800 dark:text-white">AI & ML Certification</h4>
-                  <p className="text-gray-600 dark:text-gray-300">NPTEL / Infosys Springboard</p>
-                </motion.div>
+        <Element name="github">
+          <motion.section
+            id="github-analytics"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="py-20 text-center"
+          >
+            <div className="container mx-auto px-6">
+              <h3 className="text-3xl font-semibold text-purple-600">GitHub Analytics</h3>
+              <p className="text-lg text-gray-600 dark:text-gray-300 mt-2">Check out my GitHub stats and contributions.</p>
+              <div className="flex justify-center mt-6">
+                <img
+                  src="https://github-readme-stats.vercel.app/api?username=nevinnoby&show_icons=true&theme=radical"
+                  alt="GitHub Stats"
+                  className="rounded-lg shadow-lg"
+                />
+              </div>
+              <div className="flex justify-center mt-6">
+                <img
+                  src="https://github-readme-streak-stats.herokuapp.com/?user=nevinnoby&theme=radical"
+                  alt="GitHub Streak Stats"
+                  className="rounded-lg shadow-lg"
+                />
               </div>
             </div>
+          </motion.section>
+        </Element>
 
-            {/* Contact & Social Links */}
-            <div className="mt-12">
-              <h3 className="text-3xl font-semibold text-purple-600">Get in Touch</h3>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mt-2">Feel free to reach out!</p>
-              <div className="flex justify-center space-x-6 mt-6">
-                {[FaGithub, FaLinkedin, FaTwitter, FaEnvelope].map((Icon, index) => (
-                  <motion.a
-                    key={index}
-                    href="#"
-                    className="text-purple-500 text-3xl"
-                    whileHover={{ scale: 1.2 }}
-                  >
-                    <Icon />
-                  </motion.a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </motion.section>
-        <motion.section
-          id="github-analytics"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="py-20 text-center"
-        >
-          <div className="container mx-auto px-6">
-            <h3 className="text-3xl font-semibold text-purple-600">GitHub Analytics</h3>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mt-2">Check out my GitHub stats and contributions.</p>
-            <div className="flex justify-center mt-6">
-              <img
-                src="https://github-readme-stats.vercel.app/api?username=nevinnoby&show_icons=true&theme=radical"
-                alt="GitHub Stats"
-                className="rounded-lg shadow-lg"
-              />
-            </div>
-            <div className="flex justify-center mt-6">
-              <img
-                src="https://github-readme-streak-stats.herokuapp.com/?user=nevinnoby&theme=radical"
-                alt="GitHub Streak Stats"
-                className="rounded-lg shadow-lg"
-              />
-            </div>
-          </div>
-        </motion.section>
+        <Element name="services">
+          <motion.section
+            id="services"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="py-20 text-center"
+          >
+            <Services darkMode={darkMode} />
+          </motion.section>
+        </Element>
+
+        <Element name="testimonials">
+          <motion.section
+            id="testimonials"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="py-20 text-center"
+          > 
+            <TestimonialPage darkMode={darkMode} />
+          </motion.section>
+        </Element>
+
+        <Element name="blog">
+          <motion.section
+            id="blog"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="py-20 text-center"
+          > 
+            <BlogPage darkMode={darkMode} />
+          </motion.section>
+        </Element>
+
+        <Element name="contact">
+          <motion.section
+            id="contact"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="py-20 text-center"
+          > 
+            <ContactPage darkMode={darkMode} />
+          </motion.section>
+        </Element>
       </main>
     </div>
   );
