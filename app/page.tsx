@@ -13,6 +13,7 @@ import Services from "../components/Services";
 import TestimonialPage from "../components/TestimonialPage";
 import BlogPage from "../components/BlogPage";
 import ContactPage from "../components/ContactPage";
+import CoverPage    from "@/components/CoverPage";
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("about");
@@ -73,54 +74,99 @@ export default function Home() {
 
   return (
     <div className={`min-h-screen flex flex-col ${darkMode ? "bg-gray-900 text-white" : "bg-gray-50"} transition-colors duration-300`}>
-      <header className={`fixed w-full z-50 ${isScrolling ? "bg-opacity-90 backdrop-blur-md" : ""} ${darkMode ? "bg-gray-800" : "bg-white"} shadow-lg transition-all duration-300`}>
+      <header className="fixed w-full z-50">
         <div className="container mx-auto flex justify-between items-center p-4">
-          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="flex items-center space-x-2">
+          {/* Logo with Blur Effect */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className={`flex items-center space-x-2 backdrop-blur-md bg-opacity-70 bg-transparent rounded-lg px-4 py-2`}
+          >
             <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full flex items-center justify-center">
               <span className="font-bold text-white text-lg">DP</span>
             </div>
-            <h1 className={`text-2xl font-bold ${darkMode ? "text-white" : "text-gray-800"}`}>DevPortfolio</h1>
+            <h1 className={`text-2xl font-bold ${darkMode ? "text-white" : "text-gray-800"}`}>
+              DevPortfolio
+            </h1>
           </motion.div>
 
-          <nav className="hidden md:block">
-            <ul className="flex space-x-6">
-              {["About", "Projects", "GitHub", "Services", "Testimonials", "Blog", "Contact"].map((item) => (
-                <li key={item}>
-                  <ScrollLink  
-                    to={item.toLowerCase()}
-                    smooth={true}
-                    duration={500}
-                    className={`${activeSection === item.toLowerCase() ? "text-purple-600 font-medium" : darkMode ? "text-gray-300" : "text-gray-600"} hover:text-purple-500 transition-colors px-2 py-1 relative`}
-                    onSetActive={() => setActiveSection(item.toLowerCase())}
-                  >
-                    {item}
-                    {activeSection === item.toLowerCase() && (
-                      <motion.div layoutId="navIndicator" className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600" />
-                    )}
-                  </ScrollLink>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          {/* Navigation Links with Blur Effect */}
+          <div className="flex items-center space-x-6 backdrop-blur-md bg-opacity-70 bg-transparent rounded-lg px-4 py-2">
+            <nav className="hidden md:block">
+              <ul className="flex space-x-6">
+                {["About", "Projects", "GitHub", "Services", "Testimonials", "Blog", "Contact"].map(
+                  (item) => (
+                    <li key={item}>
+                      <ScrollLink
+                        to={item.toLowerCase()}
+                        smooth={true}
+                        duration={500}
+                        className={`${
+                          activeSection === item.toLowerCase()
+                            ? "text-purple-600 font-medium"
+                            : darkMode
+                            ? "text-white"
+                            : "text-gray-800"
+                        } hover:text-purple-500 transition-colors px-2 py-1 relative`}
+                        onSetActive={() => setActiveSection(item.toLowerCase())}
+                      >
+                        {item}
+                        {activeSection === item.toLowerCase() && (
+                          <motion.div
+                            layoutId="navIndicator"
+                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600"
+                          />
+                        )}
+                      </ScrollLink>
+                    </li>
+                  )
+                )}
+              </ul>
+            </nav>
 
-          <div className="flex items-center space-x-4">
-            <button onClick={() => setDarkMode(!darkMode)} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="Toggle dark mode">
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              aria-label="Toggle dark mode"
+            >
               {darkMode ? (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" stroke="currentColor" fill="none"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 text-white"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  fill="none"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                  />
+                </svg>
               ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" stroke="currentColor" fill="none"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 text-black"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  fill="none"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                  />
+                </svg>
               )}
-            </button>
-
-            <button className="md:hidden p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" stroke="currentColor" fill="none">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
             </button>
           </div>
         </div>
       </header>
-
+      
       <main className="flex-1 container mx-auto mt-16 p-6">
         <Element name="about">
           <motion.section
@@ -132,7 +178,7 @@ export default function Home() {
           >
             <div className="container mx-auto px-6">
               {/* Profile Section */}
-              <div className="flex flex-col items-center">
+              {/* <div className="flex flex-col items-center">
                 <motion.div
                   className="w-32 h-32 rounded-full overflow-hidden shadow-lg border-4 border-purple-500"
                   initial={{ scale: 0.8 }}
@@ -172,8 +218,8 @@ export default function Home() {
                   <FaMapMarkerAlt className="text-purple-500" />
                   <span className="text-gray-600 dark:text-gray-300">Kottayam,Kerela,India</span>
                 </motion.div>
-              </div>
-
+              </div> */}
+              <CoverPage />
               {/* Skills Section */}
               <div className="mt-12">
                 <h3 className="text-3xl font-semibold text-purple-600">Skills & Technologies</h3>
@@ -192,7 +238,7 @@ export default function Home() {
             </div>
           </motion.section>
         </Element>
-        <Git isDark={!darkMode} />
+       
         <Element name="projects">
           <motion.section
             id="projects"
@@ -205,19 +251,7 @@ export default function Home() {
               <h3 className="text-3xl font-semibold text-purple-600">Experience & Projects</h3>
               
               <div className="grid md:grid-cols-2 gap-8 mt-6">
-                {/* {[1, 2].map((project) => (
-                  <motion.div
-                    key={project}
-                    className="p-6 bg-white dark:bg-gray-800 shadow-lg rounded-lg"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <h4 className="text-xl font-bold text-gray-800 dark:text-white">Project {project}</h4>
-                    <p className="text-gray-600 dark:text-gray-300 mt-2">
-                      Brief description of your project or experience.
-                    </p>
-                    
-                  </motion.div>
-                ))} */}
+                
               </div>
                 
               <Projects />
@@ -232,30 +266,13 @@ export default function Home() {
 
         <Element name="github">
           <motion.section
-            id="github-analytics"
+            id="github" // Ensure the id matches the "to" prop in ScrollLink
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="py-20 text-center"
           >
-            <div className="container mx-auto px-6">
-              <h3 className="text-3xl font-semibold text-purple-600">GitHub Analytics</h3>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mt-2">Check out my GitHub stats and contributions.</p>
-              <div className="flex justify-center mt-6">
-                <img
-                  src="https://github-readme-stats.vercel.app/api?username=nevinnoby&show_icons=true&theme=radical"
-                  alt="GitHub Stats"
-                  className="rounded-lg shadow-lg"
-                />
-              </div>
-              <div className="flex justify-center mt-6">
-                <img
-                  src="https://github-readme-streak-stats.herokuapp.com/?user=nevinnoby&theme=radical"
-                  alt="GitHub Streak Stats"
-                  className="rounded-lg shadow-lg"
-                />
-              </div>
-            </div>
+            <Git isDark={!darkMode} />
           </motion.section>
         </Element>
 

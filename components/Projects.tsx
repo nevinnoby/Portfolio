@@ -10,10 +10,12 @@ const projects = [
   { id: 4, title: "EV Website in React.js", image: "/images/project4.jpg" },
 ];
 
-const Projects = () => {
+const Projects = ({ isDark }: { isDark: boolean }) => {
   return (
     <div className="">
-      <h2 className="text-4xl font-bold text-center mb-8">My Projects</h2>
+      <h2 className={`text-4xl font-bold text-center mb-8 ${isDark ? "text-white" : "text-black"}`}>
+        My Projects
+      </h2>
 
       {/* Marquee Effect */}
       <motion.div

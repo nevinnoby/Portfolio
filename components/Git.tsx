@@ -46,7 +46,7 @@ const Git = ({ isDark }: GitProps) => {
   return (
     <div className="min-h-screen p-6 transition-all duration-500 flex flex-col items-center justify-center">
       <motion.h1
-        className="text-4xl font-bold mb-6"
+        className={`text-4xl font-bold mb-6 ${isDark ? "text-black" : "text-white"}`}
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
