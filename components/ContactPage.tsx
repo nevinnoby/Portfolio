@@ -1,72 +1,234 @@
-import { motion } from "framer-motion";
-import { FaEnvelope, FaPhone, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { FaEnvelope, FaPhone, FaGithub, FaLinkedin, FaTwitter, FaMapMarkerAlt, FaClock, FaArrowUp } from 'react-icons/fa';
 
-const ContactPage = ({ darkMode }: { darkMode: boolean }) => {
+const ContactPage = ({ darkMode }) => {
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // Demo coordinates - replace with your actual location
+  const location = {
+    lat: 40.7128,
+    lng: -74.0060,
+    address: "123 Main Street, New York, NY 10001"
+  };
+
+  // Show scroll to top button when scrolled down
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1 }
+  };
+
   return (
-    <div className={`min-h-screen py-16 px-6 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
-      {/* Hero Section */}
-      <motion.section 
-        className="text-center mb-12"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h1 className="text-4xl font-bold">📬 Get In Touch</h1>
-        <p className="text-gray-500 mt-2">Have a question or a project idea? Let's talk!</p>
-      </motion.section>
+    <footer className={`relative mt-16 ${darkMode ? "bg-gray-900 text-white" : "bg-gradient-to-r from-blue-50 to-indigo-50 text-gray-800"}`}>
+      {/* Wave divider */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-0 transform -translate-y-full">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" className={`relative block h-12 w-full ${darkMode ? "fill-gray-900" : "fill-indigo-50"}`}>
+          <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" className={darkMode ? "fill-gray-800" : "fill-blue-100"}></path>
+          <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" className={darkMode ? "fill-gray-800" : "fill-blue-100"}></path>
+          <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" className={darkMode ? "fill-gray-800" : "fill-blue-100"}></path>
+        </svg>
+      </div>
 
-      {/* Contact Form */}
-      <section className="max-w-4xl mx-auto bg-gray-100 dark:bg-gray-800 p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold mb-4">Send a Message</h2>
-        <form className="flex flex-col space-y-4">
-          <input 
-            type="text" 
-            placeholder="Your Name" 
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600"
-          />
-          <input 
-            type="email" 
-            placeholder="Your Email" 
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600"
-          />
-          <textarea 
-            rows={4} 
-            placeholder="Your Message" 
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600"
-          ></textarea>
-          <button 
-            type="submit" 
-            className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition"
-          >
-            Send Message
-          </button>
-        </form>
-      </section>
+      <div className="container mx-auto pt-16 pb-8 px-6">
+        <motion.div 
+          className="grid grid-cols-1 lg:grid-cols-3 gap-12"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {/* Contact Information */}
+          <motion.div variants={itemVariants} className="lg:col-span-1">
+            <h3 className="text-2xl font-bold mb-6 border-b-2 border-blue-500 pb-2 inline-block">Get In Touch</h3>
+            
+            <ul className="space-y-4">
+              <li className="flex items-center space-x-3">
+                <div className="bg-blue-500 text-white p-2 rounded-full">
+                  <FaEnvelope />
+                </div>
+                <a href="mailto:your@email.com" className="hover:text-blue-500 transition-colors">your@email.com</a>
+              </li>
+              
+              <li className="flex items-center space-x-3">
+                <div className="bg-green-500 text-white p-2 rounded-full">
+                  <FaPhone />
+                </div>
+                <a href="tel:+1234567890" className="hover:text-green-500 transition-colors">+123 456 7890</a>
+              </li>
+              
+              <li className="flex items-center space-x-3">
+                <div className="bg-red-500 text-white p-2 rounded-full">
+                  <FaMapMarkerAlt />
+                </div>
+                <span>{location.address}</span>
+              </li>
+              
+              <li className="flex items-center space-x-3">
+                <div className="bg-purple-500 text-white p-2 rounded-full">
+                  <FaClock />
+                </div>
+                <span>Mon - Fri: 9:00 AM - 5:00 PM</span>
+              </li>
+            </ul>
+            
+            {/* Social Media */}
+            <div className="mt-8">
+              <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
+              <div className="flex space-x-4">
+                <a href="https://github.com/yourprofile" className="transform hover:scale-110 transition-transform duration-300" aria-label="GitHub">
+                  <div className={`p-3 rounded-full ${darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-white hover:bg-gray-100"} shadow-md`}>
+                    <FaGithub className="text-xl" />
+                  </div>
+                </a>
+                <a href="https://linkedin.com/in/yourprofile" className="transform hover:scale-110 transition-transform duration-300" aria-label="LinkedIn">
+                  <div className={`p-3 rounded-full ${darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-white hover:bg-gray-100"} shadow-md`}>
+                    <FaLinkedin className="text-xl text-blue-500" />
+                  </div>
+                </a>
+                <a href="https://twitter.com/yourprofile" className="transform hover:scale-110 transition-transform duration-300" aria-label="Twitter">
+                  <div className={`p-3 rounded-full ${darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-white hover:bg-gray-100"} shadow-md`}>
+                    <FaTwitter className="text-xl text-blue-400" />
+                  </div>
+                </a>
+              </div>
+            </div>
+          </motion.div>
 
-      {/* Contact Details */}
-      <section className="text-center mt-12">
-        <h2 className="text-2xl font-semibold">📞 Contact Info</h2>
-        <div className="flex flex-wrap justify-center mt-4 space-x-6">
-          <a href="mailto:your@email.com" className="flex items-center space-x-2 hover:text-blue-500">
-            <FaEnvelope /> <span>your@email.com</span>
-          </a>
-          <a href="tel:+1234567890" className="flex items-center space-x-2 hover:text-blue-500">
-            <FaPhone /> <span>+123 456 7890</span>
-          </a>
+          {/* Quick Contact Form */}
+          <motion.div variants={itemVariants} className="lg:col-span-1">
+            <h3 className="text-2xl font-bold mb-6 border-b-2 border-blue-500 pb-2 inline-block">Send a Message</h3>
+            
+            <form className="space-y-4">
+              <div className="relative">
+                <input 
+                  type="text" 
+                  placeholder="Your Name" 
+                  className={`w-full p-3 pl-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200 shadow-md"
+                  }`}
+                />
+              </div>
+              
+              <div className="relative">
+                <input 
+                  type="email" 
+                  placeholder="Your Email" 
+                  className={`w-full p-3 pl-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200 shadow-md"
+                  }`}
+                />
+              </div>
+              
+              <div className="relative">
+                <textarea 
+                  rows={3} 
+                  placeholder="Your Message" 
+                  className={`w-full p-3 pl-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200 shadow-md"
+                  }`}
+                ></textarea>
+              </div>
+              
+              <button 
+                type="submit" 
+                className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-lg w-full font-medium"
+              >
+                Send Message
+              </button>
+            </form>
+          </motion.div>
+
+          {/* Map Location */}
+          <motion.div variants={itemVariants} className="lg:col-span-1">
+            <h3 className="text-2xl font-bold mb-6 border-b-2 border-blue-500 pb-2 inline-block">Find Us</h3>
+            
+            <div className={`rounded-lg overflow-hidden shadow-lg ${darkMode ? "border border-gray-700" : ""}`}>
+              {/* Replace the URL with your actual Google Maps embed URL */}
+              <iframe 
+                src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343008!2d-74.00425384822144!3d40.71275444716787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDAyJzQ2LjAiTiA3NMKwMDAnMTUuNiJX!5e0!3m2!1sen!2sus!4v1625761035447!5m2!1sen!2sus`} 
+                width="100%" 
+                height="250" 
+                style={{ border: 0 }} 
+                allowFullScreen="" 
+                loading="lazy" 
+                title="Office Location Map"
+              ></iframe>
+            </div>
+            
+            <div className="mt-6">
+              <h4 className="text-lg font-semibold mb-3">Business Hours</h4>
+              <ul className="space-y-2">
+                <li className="flex justify-between">
+                  <span>Monday - Friday</span>
+                  <span>9:00 AM - 5:00 PM</span>
+                </li>
+                <li className="flex justify-between">
+                  <span>Saturday</span>
+                  <span>10:00 AM - 2:00 PM</span>
+                </li>
+                <li className="flex justify-between">
+                  <span>Sunday</span>
+                  <span>Closed</span>
+                </li>
+              </ul>
+            </div>
+          </motion.div>
+        </motion.div>
+        
+        {/* Bottom bar */}
+        <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p className="text-sm">© {new Date().getFullYear()} Your Company. All rights reserved.</p>
+            <div className="flex space-x-4 mt-4 md:mt-0">
+              <a href="#" className="text-sm hover:underline">Privacy Policy</a>
+              <a href="#" className="text-sm hover:underline">Terms of Service</a>
+              <a href="#" className="text-sm hover:underline">Sitemap</a>
+            </div>
+          </div>
         </div>
-      </section>
-
-      {/* Social Media Links */}
-      <section className="text-center mt-8">
-        <h2 className="text-2xl font-semibold">🔗 Connect with Me</h2>
-        <div className="flex justify-center mt-4 space-x-6 text-2xl">
-          <a href="https://github.com/yourprofile" className="hover:text-gray-500"><FaGithub /></a>
-          <a href="https://linkedin.com/in/yourprofile" className="hover:text-blue-500"><FaLinkedin /></a>
-          <a href="https://twitter.com/yourprofile" className="hover:text-blue-400"><FaTwitter /></a>
-        </div>
-      </section>
-    </div>
+      </div>
+      
+      {/* Scroll to top button */}
+      {showScrollTop && (
+        <button 
+          onClick={scrollToTop}
+          className={`fixed right-8 bottom-8 p-3 rounded-full shadow-lg transition-all duration-300 z-50 ${
+            darkMode ? "bg-blue-600 hover:bg-blue-700" : "bg-blue-500 hover:bg-blue-600"
+          } text-white`}
+          aria-label="Scroll to top"
+        >
+          <FaArrowUp />
+        </button>
+      )}
+    </footer>
   );
 };
+
+
 
 export default ContactPage;

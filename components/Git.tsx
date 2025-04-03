@@ -44,9 +44,9 @@ const Git = ({ isDark }: GitProps) => {
   }, []);
 
   return (
-    <div className="min-h-screen p-6 transition-all duration-500 flex flex-col items-center justify-center">
+    <div className="min-h-screen p-6 transition-all duration-500 flex flex-col items-center justify-center bg-gray-900 text-white">
       <motion.h1
-        className={`text-4xl font-bold mb-6 ${isDark ? "text-black" : "text-white"}`}
+        className="text-4xl font-bold mb-12 text-center"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -55,18 +55,16 @@ const Git = ({ isDark }: GitProps) => {
       </motion.h1>
 
       {loading ? (
-        <div className="animate-pulse flex space-x-4">
-          <div className="w-48 h-48 bg-gray-700 rounded-full"></div>
-          <div>
-            <div className="h-6 w-32 bg-gray-700 rounded mb-2"></div>
-            <div className="h-6 w-40 bg-gray-700 rounded"></div>
-          </div>
+        <div className="animate-pulse flex flex-col items-center space-y-4">
+          <div className="w-32 h-32 bg-gray-700 rounded-full"></div>
+          <div className="h-6 w-48 bg-gray-700 rounded"></div>
         </div>
       ) : (
         <>
+          {/* GitHub Stats Card */}
           <motion.div
-            className={`${isDark ? "bg-gray-800 text-white" : "bg-gray-100 text-black"} p-6 rounded-lg shadow-lg w-[400px] text-center`}
-            initial={{ opacity: 0, scale: 0.5 }}
+            className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md text-center mb-12"
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
           >
@@ -101,29 +99,28 @@ const Git = ({ isDark }: GitProps) => {
             </motion.a>
           </motion.div>
 
-          {/* GitHub Badges */}
-          <div className="mt-10 w-full text-center">
-            <h2 className="text-3xl font-semibold mb-4">🏆 GitHub Badges</h2>
-            <div className="flex flex-wrap justify-center gap-4">
-              {/* <img src={`https://github-readme-streak-stats.herokuapp.com/?user=${GITHUB_USERNAME}&theme=${isDark ? "tokyonight" : "default"}`} alt="GitHub Streak" /> */}
-              <img src={`https://github-profile-trophy.vercel.app/?username=${GITHUB_USERNAME}&theme=${isDark ? "tokyonight" : "default"}`} alt="GitHub Trophies" />
-              <img src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${GITHUB_USERNAME}&layout=compact&theme=${isDark ? "tokyonight" : "default"}`} alt="Most Used Languages" />
-            </div>
-          </div>
-
           {/* Repositories List */}
-          <motion.div className="mt-10 w-full max-w-4xl">
-            <h2 className="text-3xl font-semibold mb-4">🔍 My Repositories</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <motion.div className="w-full max-w-6xl">
+            <h2 className="text-3xl font-semibold mb-6 text-center">🔍 My Repositories</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {repos.slice(0, 6).map((repo) => (
-                <motion.div key={repo.id} className={`${isDark ? "bg-gray-800" : "bg-gray-100"} p-4 rounded-lg shadow-md`} whileHover={{ scale: 1.05 }}>
+                <motion.div
+                  key={repo.id}
+                  className="bg-gray-800 p-4 rounded-lg shadow-md"
+                  whileHover={{ scale: 1.05 }}
+                >
                   <h3 className="text-lg font-semibold text-green-400">{repo.name}</h3>
                   <p className="text-sm text-gray-400">{repo.description || "No description available"}</p>
                   <div className="flex justify-between text-sm mt-2">
                     <span>🌟 {repo.stargazers_count} Stars</span>
                     <span>🍴 {repo.forks_count} Forks</span>
                   </div>
-                  <a href={repo.html_url} target="_blank" className="text-blue-400 mt-2 inline-block" rel="noopener noreferrer">
+                  <a
+                    href={repo.html_url}
+                    target="_blank"
+                    className="text-blue-400 mt-2 inline-block"
+                    rel="noopener noreferrer"
+                  >
                     View Repository →
                   </a>
                 </motion.div>
@@ -133,11 +130,17 @@ const Git = ({ isDark }: GitProps) => {
 
           {/* Organizations */}
           {organizations.length > 0 && (
-            <motion.div className="mt-10 w-full max-w-4xl">
-              <h2 className="text-3xl font-semibold mb-4">🏢 Organizations</h2>
-              <div className="flex space-x-4">
+            <motion.div className="mt-12 w-full max-w-6xl">
+              <h2 className="text-3xl font-semibold mb-6 text-center">🏢 Organizations</h2>
+              <div className="flex flex-wrap justify-center gap-6">
                 {organizations.map((org) => (
-                  <motion.img key={org.id} src={org.avatar_url} alt={org.login} className="w-20 h-20 rounded-full border-2 border-white" whileHover={{ scale: 1.2 }} />
+                  <motion.img
+                    key={org.id}
+                    src={org.avatar_url}
+                    alt={org.login}
+                    className="w-20 h-20 rounded-full border-2 border-white"
+                    whileHover={{ scale: 1.2 }}
+                  />
                 ))}
               </div>
             </motion.div>
