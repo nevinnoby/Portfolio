@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 // Types
 interface Service {
+  link: Url;
   title: string;
   description: string;
   icon: string;
@@ -26,49 +28,53 @@ const services: Service[] = [
     description: "Modern, responsive, and fast websites with attention to performance and user experience.",
     icon: "💻",
     color: "#3B82F6", // blue
-    features: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "Responsive Design"]
+    features: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "Responsive Design"],
+    link: "https://legacy.reactjs.org/"
   },
   { 
     title: "Mobile App Development", 
     description: "Cross-platform mobile apps that deliver native-like performance and seamless UX.",
     icon: "📱",
     color: "#10B981", // green
-    features: ["React Native", "Flutter", "iOS", "Android", "Mobile-First Design"]
+    features: ["React Native","Firebase","Expo","Android", "Mobile-First Design"],
+    link: "https://reactnative.dev/" 
   },
   { 
     title: "UI/UX Design", 
     description: "User-centered designs that combine aesthetics with functionality for optimal engagement.",
     icon: "🎨",
     color: "#8B5CF6", // purple
-    features: ["Wireframing", "Prototyping", "User Research", "Visual Design", "User Testing"]
+    features: ["Canva", "Prototyping", "User Research", "Visual Design", "User Testing"],
+    link: "https://www.canva.com/linkedin-banners/templates/" 
   },
   { 
     title: "IoT Solutions", 
     description: "Smart, connected systems that bring digital intelligence to physical devices and environments.",
     icon: "🔌",
     color: "#F59E0B", // amber
-    features: ["Sensor Integration", "Real-time Monitoring", "Automation", "Data Analysis", "Smart Controls"]
+    features: ["Sensor Integration", "Real-time Monitoring", "Automation", "Data Analysis", "Smart Controls"],
+    link: "https://en.wikipedia.org/wiki/Internet_of_things" 
   }
 ];
 
 const testimonials: Testimonial[] = [
   {
-    quote: "Working with this developer was a game-changer for our business. The web application not only looks stunning but performs exceptionally well.",
-    author: "Sarah Johnson",
-    role: "CEO, TechStart",
-    avatar: "/api/placeholder/80/80"
+    quote: "You can’t connect the dots looking forward; you can only connect them looking backward. So you have to trust that the dots will somehow connect in your future.",
+    author: "Steve Jobs",
+    role: "Founder, Apple Inc",
+    avatar: "/media/steve.jpeg"
   },
   {
-    quote: "The attention to detail and technical expertise demonstrated in our IoT project exceeded our expectations. Would definitely work together again!",
-    author: "Mark Thompson",
-    role: "CTO, SmartSystems",
-    avatar: "/api/placeholder/80/80"
+    quote: "It's fine to celebrate success, but it is more important to heed the lessons of failure.",
+    author: "Bill Gates",
+    role: "Founder, Microsoft",
+    avatar: "/media/bill.jpg"
   },
   {
-    quote: "Our mobile app went from concept to market in record time. The user experience is flawless and our customers love it!",
-    author: "Elena Diaz",
-    role: "Product Manager, AppWorks",
-    avatar: "/api/placeholder/80/80"
+    quote: "Life is fragile. We're not guaranteed a tomorrow so give it everything you've got.",
+    author: "Tim Cook",
+    role: "CEO, Apple Inc",
+    avatar: "/media/tim.jpeg"
   }
 ];
 
@@ -122,14 +128,16 @@ const ServiceCard = ({ service, index }: { service: Service, index: number }) =>
           ))}
         </ul>
         
-        <motion.button
-          className="mt-6 px-6 py-2 rounded-full text-white font-medium transition-all"
-          style={{ backgroundColor: service.color }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Learn More
-        </motion.button>
+        <Link href={service.link}>
+          <motion.button
+            className="mt-6 px-6 py-2 rounded-full text-white font-medium transition-all"
+            style={{ backgroundColor: service.color }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Learn More
+          </motion.button>
+        </Link>
       </motion.div>
       
       {/* Animated corner decoration */}
@@ -357,7 +365,7 @@ const Services = ({ darkMode }: { darkMode: boolean }) => {
             transition={{ duration: 0.5 }}
           >
             <h2 className="text-3xl font-bold mb-4">My Work Process</h2>
-            <p className="text-gray-600 dark:text-gray-300">A structured and collaborative approach to ensure your project is delivered on time and exceeds expectations.</p>
+            <p className="text-gray-600 dark:text-gray-300">A structured and collaborative approach to ensure the project is delivered on time and exceeds expectations.</p>
           </motion.div>
           
           {/* Process Steps */}
@@ -365,7 +373,7 @@ const Services = ({ darkMode }: { darkMode: boolean }) => {
             <ProcessStep 
               number={1} 
               title="Discovery & Planning" 
-              description="We begin with a deep understanding of your goals, target audience, and requirements to create a comprehensive project roadmap."
+              description="Begin with a deep understanding of required  goals, target audience, and requirements to create a comprehensive project roadmap."
               delay={0.1}
             />
             <ProcessStep 
@@ -383,7 +391,7 @@ const Services = ({ darkMode }: { darkMode: boolean }) => {
             <ProcessStep 
               number={4} 
               title="Deployment & Support" 
-              description="Launching your project with careful attention to detail, followed by ongoing support and optimization."
+              description="Launching the project with careful attention to detail, followed by ongoing support and optimization."
               delay={0.4}
             />
           </div>
@@ -400,8 +408,8 @@ const Services = ({ darkMode }: { darkMode: boolean }) => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl font-bold mb-4">Client Testimonials</h2>
-            <p className="text-gray-600 dark:text-gray-300">Don't just take my word for it — here's what clients have to say about working with me.</p>
+            <h2 className="text-3xl font-bold mb-4">Echoes of Great Minds</h2>
+            <p className="text-gray-600 dark:text-gray-300">Timeless wisdom from legendary minds, inspiring thoughts, actions, and ambitions. 🚀✨</p>
           </motion.div>
           
           <TestimonialCarousel testimonials={testimonials} darkMode={darkMode} />
@@ -469,14 +477,20 @@ const Services = ({ darkMode }: { darkMode: boolean }) => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                <motion.button 
+               
+                <motion.a 
+                 href="https://nextjs.org/docs/app/getting-started/installation" // Replace with your external website URL
+                  target="_blank"
                   className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-full shadow-lg"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Start a Project
-                </motion.button>
-                <motion.button 
+                </motion.a>
+                <motion.a
+                  href="https://github.com/nevinnoby/Portfolio" // Replace with your external website URL
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`px-8 py-3 font-medium rounded-full ${
                     darkMode 
                       ? "bg-gray-700 text-white hover:bg-gray-600" 
@@ -486,7 +500,7 @@ const Services = ({ darkMode }: { darkMode: boolean }) => {
                   whileTap={{ scale: 0.95 }}
                 >
                   View Portfolio
-                </motion.button>
+                </motion.a>
               </motion.div>
             </div>
           </motion.div>
@@ -494,7 +508,7 @@ const Services = ({ darkMode }: { darkMode: boolean }) => {
       </section>
       
       {/* Footer */}
-      <footer className={`${darkMode ? "bg-gray-800" : "bg-gray-100"} py-12`}>
+      {/* <footer className={`${darkMode ? "bg-gray-800" : "bg-gray-100"} py-12`}>
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-8 md:mb-0">
@@ -520,7 +534,7 @@ const Services = ({ darkMode }: { darkMode: boolean }) => {
             <p>© {new Date().getFullYear()} Your Name. All rights reserved.</p>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 };

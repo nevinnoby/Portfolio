@@ -145,16 +145,27 @@ const CoverPage = () => {
             fontSize: "clamp(8vw, 12vw, 16vw)",
           }}
         >
-          {/* First word with conditional wavy animation */}
-          <div className="flex justify-center mb-2">
+
+
+
+
+
+          {/* first word with conditional wavy animation */}
+          <div className="flex justify-center">
             {Array.from("PORTFOLIO").map((char, index) => (
-              <motion.span
-                key={`word1-${index}`}
-                className="inline-block"
-                style={{
-                  textShadow: "0 0 40px rgba(168, 85, 247, 0.5)",
-                  color: index % 2 === 0 ? "white" : "#e9d5ff",
-                }}
+               <motion.span
+               key={`word1-${index}`}
+               className="inline-block px-1"
+               style={{
+                 background: `linear-gradient(135deg, 
+                   ${index % 3 === 0 ? '#c084fc' : index % 3 === 1 ? '#818cf8' : '#60a5fa'}, 
+                   ${index % 3 === 0 ? '#db2777' : index % 3 === 1 ? '#9333ea' : '#4f46e5'})`,
+                 WebkitBackgroundClip: 'text',
+                 WebkitTextFillColor: 'transparent',
+                 textShadow: `0 0 20px rgba(${index % 3 === 0 ? '192, 132, 252' : index % 3 === 1 ? '129, 140, 248' : '96, 165, 250'}, 0.7)`,
+                 filter: 'drop-shadow(0 0 2px rgba(168, 85, 247, 0.3))',
+                 fontWeight: 800,
+                 fontSize: 200               }}
                 animate={
                   isAnimating
                     ? {
@@ -183,23 +194,34 @@ const CoverPage = () => {
             ))}
           </div>
 
-          {/* Second word with conditional wavy animation */}
-          <div className="flex justify-center">
-            {Array.from("SHOWCASE").map((char, index) => (
-              <motion.span
-                key={`word2-${index}`}
-                className="inline-block"
-                style={{
-                  textShadow: "0 0 40px rgba(168, 85, 247, 0.5)",
-                  color: index % 2 === 0 ? "#e9d5ff" : "white",
-                }}
+
+
+
+          {/* second word with conditional wavy animation */}
+          <div className="flex justify-center mb-6 text-4xl font-bold tracking-wider">
+          {Array.from("SHOWCASE").map((char, index) => (
+               <motion.span
+               key={`word1-${index}`}
+               className="inline-block px-1"
+               style={{
+                 background: `linear-gradient(135deg, 
+                   ${index % 3 === 0 ? '#c084fc' : index % 3 === 1 ? '#818cf8' : '#60a5fa'}, 
+                   ${index % 3 === 0 ? '#db2777' : index % 3 === 1 ? '#9333ea' : '#4f46e5'})`,
+                 WebkitBackgroundClip: 'text',
+                 WebkitTextFillColor: 'transparent',
+                 textShadow: `0 0 20px rgba(${index % 3 === 0 ? '192, 132, 252' : index % 3 === 1 ? '129, 140, 248' : '96, 165, 250'}, 0.7)`,
+                 filter: 'drop-shadow(0 0 2px rgba(168, 85, 247, 0.3))',
+                 fontWeight: 800,
+                 fontSize: 100   
+               }}
                 animate={
-                  isAnimating
-                    ? {
-                        y: [0, -10, 0, 10, 0], // Wavy motion
-                      }
-                    : { y: 0 } // Stop animation
-                }
+                                isAnimating
+                        ? {
+                            y: [0, -12, 0, 12, 0], // Enhanced wavy motion
+                            rotate: [0, -2, 0, 2, 0], // Slight rotation for more dynamic feel
+                          }
+                        : { y: 0, rotate: 0 } // Stop animation
+                    }
                 transition={
                   isAnimating
                     ? {
@@ -211,43 +233,47 @@ const CoverPage = () => {
                     : {}
                 }
                 whileHover={{
-                  scale: 1.2, // Slightly enlarge the letter on hover
-                  color: "#ff80ff", // Highlight color
-                  textShadow: "0 0 60px rgba(255, 128, 255, 0.8)", // Glow effect
+                  scale: 1.3, // Slightly larger scale on hover
+                  rotate: [-5, 5, 0], // Wiggle effect on hover
+                  transition: { duration: 0.4 }, // Quick transition
+                  filter: 'drop-shadow(0 0 8px rgba(192, 132, 252, 0.8))', // Enhanced glow
                 }}
               >
                 {char}
               </motion.span>
             ))}
           </div>
+
         </motion.h1>
       </motion.div>
         
       {/* Scroll down button with cleaner animation */}
-      <motion.button
-        onClick={scrollToAbout}
-        className="mt-12 px-8 py-3 bg-transparent border border-purple-400 rounded-full hover:bg-purple-900/30 transition duration-300 flex items-center gap-2 group"
-        style={{ opacity: arrowOpacity }}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
-        whileHover={{ scale: 1.05 }}
-      >
-        <span className="font-light tracking-wider text-sm">EXPLORE</span>
-        <motion.div
-          animate={{ 
-            y: [0, 5, 0],
-          }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            repeatType: "loop",
-            ease: "easeInOut"
-          }}
+      <div className="flex justify-center mt-12">
+        <motion.button
+          onClick={scrollToAbout}
+          className="px-8 py-3 bg-transparent border border-purple-400 rounded-full hover:bg-purple-900/30 transition duration-300 flex items-center gap-2 group"
+          style={{ opacity: arrowOpacity, alignItems: "center" }} // Align items center
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5, duration: 0.8 }}
+          whileHover={{ scale: 1.05 }}
         >
-          <FaChevronDown className="text-purple-300 group-hover:text-white transition-colors" />
-        </motion.div>
-      </motion.button>
+          <span className="font-light tracking-wider text-sm">EXPLORE</span>
+          <motion.div
+            animate={{ 
+              y: [0, 5, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              repeatType: "loop",
+              ease: "easeInOut"
+            }}
+          >
+            <FaChevronDown className="text-purple-300 group-hover:text-white transition-colors" />
+          </motion.div>
+        </motion.button>
+      </div>
 
       {/* Background image - more subtle integration */}
       <motion.div
@@ -259,7 +285,7 @@ const CoverPage = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
         <img
-          src="/images/portfolio-preview.jpg"
+          src="/media/prev.png"
           alt="Portfolio Preview"
           className="w-full h-full object-cover"
         />
@@ -288,7 +314,7 @@ const CoverPage = () => {
               transition={{ duration: 0.8 }}
             >
               <Image
-                src="/profile.jpg"
+                src="/media/profile.jpg"
                 alt="Profile Picture"
                 width={128}
                 height={128}

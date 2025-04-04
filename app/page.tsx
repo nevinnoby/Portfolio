@@ -13,7 +13,8 @@ import ContactPage from "../components/ContactPage";
 import CoverPage from "@/components/CoverPage";
 import Skills from "../components/Skills"; // Import the Skills component
 import Head from "next/head";
-
+import Cover from "@/components/Cover";
+import EventCard from "@/components/EventCard";
 // Updated Projects component with auto-scrolling
 const Projects = ({ isDark }) => {
   const [currentProject, setCurrentProject] = useState(0);
@@ -22,30 +23,43 @@ const Projects = ({ isDark }) => {
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
-      description: "A full-featured online shopping platform with cart functionality, payment integration, and user authentication.",
-      image: "/images/project1.jpg", // Update with your actual image path
-      tags: ["React", "Node.js", "MongoDB", "Stripe"],
+      title: "ServeLink",
+      description: "Servelink is a MERN stack-based platform connecting volunteers with organizations. Volunteers can register, explore opportunities, and enroll, while organizations post activities and manage participants, fostering community engagement and social impact. 🚀",
+      image: "/media/S1.png", // Update with your actual image path
+      tags: ["React", "Node.js", "MongoDB", "Express"],
       link: "#",
-      github: "#"
+      github: "#",
+      video: "/media/Servelink.mp4" // Add video URL
     },
     {
       id: 2,
-      title: "Task Management App",
-      description: "A collaborative project management tool with real-time updates, drag-and-drop interface, and team collaboration features.",
-      image: "/images/project2.jpg", // Update with your actual image path
-      tags: ["React", "Firebase", "Tailwind CSS", "Redux"],
+      title: "FutureScape",
+      description: "FutureScape is an immersive coding challenge platform where participants engage in thrilling tech-based competitions. From blind coding to real-time problem-solving, players navigate through diverse coding challenges, unlocking levels and earning points. With live leaderboards, a hint system, and secure authentication, FutureScape delivers an engaging and competitive experience for developers of all skill levels. ",
+      image: "/media/fu.png", // Update with your actual image path
+      tags: ["Next.js", "React", "Supabase", "Tailwind CSS"],
       link: "#",
-      github: "#"
+      github: "https://github.com/futureScape-asthra/futureScape",
+      video: "/media/f.mp4" // Add video URL
     },
     {
       id: 3,
-      title: "AI Content Generator",
-      description: "An AI-powered application that helps users create optimized content for various platforms and purposes.",
-      image: "/images/project3.jpg", // Update with your actual image path
-      tags: ["Python", "TensorFlow", "Next.js", "API"],
+      title: "Perimeter",
+      description: "Perimeter is a Flat Management System which contains seperate React Native apps for admin and users built with Firebase for efficient apartment and visitor management. It features real-time room status updates, face recogonized entry & exit, resident tracking, and a secure visitor management system. The app allows admins to manage residents, track visitors, and handle security logs seamlessly, while users can view room availability and access their apartment details.",
+      image: "/media/icon.png",
+      tags: ["React Native", "Firebase", "Cloudinary"],
       link: "#",
-      github: "#"
+      github: "https://github.com/Perimeter-Final-Project",
+      video: "/media/Perimeter.mp4"
+    },
+    {
+      id: 4,
+      title: "Travell App",
+      description: "Travel is a sleek and responsive travel website built with React.js, offering a seamless user experience with smooth animations. Users can explore various destinations, filter locations based on price, and plan their perfect trip effortlessly. With its clean and modern UI, Travel ensures a visually engaging and intuitive browsing experience for travelers. ✈️🌍✨",
+      image: "/media/tr3.png", // Update with your actual image path
+      tags: ["ReactJs"],
+      link: "https://nevinnoby.github.io/travel-webapp/",
+      github: "https://github.com/nevinnoby/travel-webapp",
+      video: "/media/Travel.mp4"// Add video URL
     }
     // Add more projects as needed
   ];
@@ -98,21 +112,22 @@ const Projects = ({ isDark }) => {
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-full">
               {/* Project Image */}
-              <div className="relative rounded-2xl overflow-hidden shadow-xl">
-                {projects[currentProject].image ? (
-                  <Image 
-                    src={projects[currentProject].image} 
-                    alt={projects[currentProject].title}
-                    fill
-                    style={{ objectFit: "cover" }}
-                    className="transition-transform duration-300 hover:scale-105"
-                  />
-                ) : (
-                  <div className={`w-full h-full flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-200'}`}>
-                    <span className="text-gray-500">Image Placeholder</span>
-                  </div>
-                )}
-              </div>
+              <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-video">
+  {projects[currentProject].image ? (
+    <Image 
+      src={projects[currentProject].image} 
+      alt={projects[currentProject].title}
+      fill={true}
+      sizes="(max-width: 768px) 100vw, 500px"
+      className="object-cover rounded-lg"
+      priority
+    />
+  ) : (
+    <div className={`w-full h-full flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-200'}`}>
+      <span className="text-gray-500">Image Placeholder</span>
+    </div>
+  )}
+</div>
               
               {/* Project Info */}
               <div className={`flex flex-col justify-center text-left ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
@@ -137,13 +152,20 @@ const Projects = ({ isDark }) => {
                 
                 {/* Action Buttons */}
                 <div className="flex gap-4">
-                  <a 
-                    href={projects[currentProject].link} 
+                  <button
+                    onClick={() => {
+                      const videoUrl = projects[currentProject].video;
+                      if (videoUrl) {
+                        window.open(videoUrl, "_blank", "noopener,noreferrer,width=800,height=600");
+                      } else {
+                        alert("Video not available for this project.");
+                      }
+                    }}
                     className="px-6 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg hover:shadow-lg transition duration-300"
                     aria-label={`View live demo of ${projects[currentProject].title}`}
                   >
                     View Live
-                  </a>
+                  </button>
                   <a 
                     href={projects[currentProject].github}
                     className={`px-6 py-2 border rounded-lg font-medium transition duration-300 ${
@@ -226,20 +248,14 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  // Tidio chat integration
+  // Remove the Tidio chat integration
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "//code.tidio.co/zmutz7gaymrye658skilzzin5gwtd7z8.js";
-    script.async = true;
-    document.body.appendChild(script);
-    
     // Simulate loading state
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
-    
+
     return () => {
-      document.body.removeChild(script);
       clearTimeout(timer);
     };
   }, []);
@@ -300,12 +316,17 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className={`flex items-center space-x-2 backdrop-blur-md bg-opacity-70 bg-transparent rounded-lg px-4 py-2`}
           >
-            <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full flex items-center justify-center">
-              <span className="font-bold text-white text-lg">DP</span>
-            </div>
-            <h1 className={`text-2xl font-bold ${darkMode ? "text-white" : "text-gray-800"}`}>
-              DevPortfolio
-            </h1>
+            {/* <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full flex items-center justify-center">
+              <span className="font-bold text-white text-lg"></span>
+            </div> */}
+           <motion.div 
+            whileHover={{ scale: 1.05 }} 
+            className="text-xl font-bold tracking-tighter"
+          >
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+              Portfolio
+            </span>
+          </motion.div>
           </motion.div>
 
           {/* Navigation Links with Blur Effect - Desktop */}
@@ -322,7 +343,7 @@ export default function Home() {
                               ? "text-purple-600 font-medium"
                               : darkMode
                               ? "text-white"
-                              : "text-gray-800"
+                              : "text-white"
                           } hover:text-purple-500 transition-colors px-2 py-1 relative`}
                         >
                           {item}
@@ -338,7 +359,7 @@ export default function Home() {
                             ? "text-purple-600 font-medium"
                             : darkMode
                             ? "text-white"
-                            : "text-gray-800"
+                            : "text-white"
                         } hover:text-purple-500 transition-colors px-2 py-1 relative cursor-pointer`}
                         onSetActive={() => setActiveSection(item.toLowerCase())}
                       >
@@ -486,10 +507,12 @@ export default function Home() {
             className="w-full min-h-screen overflow-hidden"
           >
             <div className="w-full">
-              <CoverPage />
+            <Cover darkMode={darkMode} />
             </div>
           </motion.section>
         </Element>
+
+<EventCard darkMode={darkMode}/>
 
         {/* Services Section */}
         <Element name="services">
@@ -632,7 +655,7 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="py-20 text-center"
           >
-            <ContactPage darkMode={darkMode} />
+            <ContactPage  darkMode={darkMode} />
           </motion.section>
         </Element>
       </main>

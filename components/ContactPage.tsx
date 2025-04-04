@@ -1,15 +1,17 @@
+"use client";
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaEnvelope, FaPhone, FaGithub, FaLinkedin, FaTwitter, FaMapMarkerAlt, FaClock, FaArrowUp } from 'react-icons/fa';
+import { FaEnvelope, FaPhone, FaGithub, FaLinkedin, FaTwitter, FaMapMarkerAlt, FaClock, FaArrowUp, FaWhatsapp } from 'react-icons/fa';
 
 const ContactPage = ({ darkMode }) => {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Demo coordinates - replace with your actual location
   const location = {
-    lat: 40.7128,
-    lng: -74.0060,
-    address: "123 Main Street, New York, NY 10001"
+    lat: 9.668352,
+    lng: 76.830366,
+    address: "Madappallil House, Poonjar Thekkekara, Kerala, India",
   };
 
   // Show scroll to top button when scrolled down
@@ -71,14 +73,14 @@ const ContactPage = ({ darkMode }) => {
                 <div className="bg-blue-500 text-white p-2 rounded-full">
                   <FaEnvelope />
                 </div>
-                <a href="mailto:your@email.com" className="hover:text-blue-500 transition-colors">your@email.com</a>
+                <a href="mailto:your@email.com" className="hover:text-blue-500 transition-colors">nevinmadappallil@gmail.com</a>
               </li>
               
               <li className="flex items-center space-x-3">
                 <div className="bg-green-500 text-white p-2 rounded-full">
                   <FaPhone />
                 </div>
-                <a href="tel:+1234567890" className="hover:text-green-500 transition-colors">+123 456 7890</a>
+                <a href="tel:+1234567890" className="hover:text-green-500 transition-colors">+91 9946465601</a>
               </li>
               
               <li className="flex items-center space-x-3">
@@ -92,27 +94,27 @@ const ContactPage = ({ darkMode }) => {
                 <div className="bg-purple-500 text-white p-2 rounded-full">
                   <FaClock />
                 </div>
-                <span>Mon - Fri: 9:00 AM - 5:00 PM</span>
+                <span>Mon - Sat: 9:00 AM - 5:00 PM</span>
               </li>
             </ul>
             
             {/* Social Media */}
             <div className="mt-8">
-              <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
+              <h4 className="text-lg font-semibold mb-4">Follow Me</h4>
               <div className="flex space-x-4">
-                <a href="https://github.com/yourprofile" className="transform hover:scale-110 transition-transform duration-300" aria-label="GitHub">
+                <a href="https://github.com/nevinnoby" className="transform hover:scale-110 transition-transform duration-300" aria-label="GitHub">
                   <div className={`p-3 rounded-full ${darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-white hover:bg-gray-100"} shadow-md`}>
                     <FaGithub className="text-xl" />
                   </div>
                 </a>
-                <a href="https://linkedin.com/in/yourprofile" className="transform hover:scale-110 transition-transform duration-300" aria-label="LinkedIn">
+                <a href="https://linkedin.com/in/nevin-m-noby-80058125a/" className="transform hover:scale-110 transition-transform duration-300" aria-label="LinkedIn">
                   <div className={`p-3 rounded-full ${darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-white hover:bg-gray-100"} shadow-md`}>
                     <FaLinkedin className="text-xl text-blue-500" />
                   </div>
                 </a>
-                <a href="https://twitter.com/yourprofile" className="transform hover:scale-110 transition-transform duration-300" aria-label="Twitter">
+                <a href="https://wa.me/919946465601" className="transform hover:scale-110 transition-transform duration-300" aria-label="Twitter">
                   <div className={`p-3 rounded-full ${darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-white hover:bg-gray-100"} shadow-md`}>
-                    <FaTwitter className="text-xl text-blue-400" />
+                    <FaWhatsapp  className="text-xl text-blue-400" />
                   </div>
                 </a>
               </div>
@@ -123,77 +125,97 @@ const ContactPage = ({ darkMode }) => {
           <motion.div variants={itemVariants} className="lg:col-span-1">
             <h3 className="text-2xl font-bold mb-6 border-b-2 border-blue-500 pb-2 inline-block">Send a Message</h3>
             
-            <form className="space-y-4">
-              <div className="relative">
-                <input 
-                  type="text" 
-                  placeholder="Your Name" 
-                  className={`w-full p-3 pl-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200 shadow-md"
-                  }`}
-                />
-              </div>
-              
-              <div className="relative">
-                <input 
-                  type="email" 
-                  placeholder="Your Email" 
-                  className={`w-full p-3 pl-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200 shadow-md"
-                  }`}
-                />
-              </div>
-              
-              <div className="relative">
-                <textarea 
-                  rows={3} 
-                  placeholder="Your Message" 
-                  className={`w-full p-3 pl-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200 shadow-md"
-                  }`}
-                ></textarea>
-              </div>
-              
-              <button 
-                type="submit" 
-                className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-lg w-full font-medium"
-              >
-                Send Message
-              </button>
-            </form>
+            <form 
+  className="space-y-4" 
+  onSubmit={(e) => {
+    e.preventDefault();
+    const name = (e.target as any).name.value;
+    const email = (e.target as any).email.value;
+    const message = (e.target as any).message.value;
+    
+    const mailtoLink = `mailto:someone@example.com?subject=Message from ${name}&body=Email: ${email}%0D%0A%0D%0A${message}`;
+    window.location.href = mailtoLink;
+  }}
+>
+  <div className="relative">
+    <input 
+      type="text" 
+      name="name"
+      placeholder="Your Name" 
+      className={`w-full p-3 pl-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+        darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200 shadow-md"
+      }`}
+    />
+  </div>
+
+  <div className="relative">
+    <input 
+      type="email" 
+      name="email"
+      placeholder="Your Email" 
+      className={`w-full p-3 pl-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+        darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200 shadow-md"
+      }`}
+    />
+  </div>
+
+  <div className="relative">
+    <textarea 
+      rows={3} 
+      name="message"
+      placeholder="Your Message" 
+      className={`w-full p-3 pl-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+        darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200 shadow-md"
+      }`}
+    ></textarea>
+  </div>
+
+  <button 
+    type="submit" 
+    className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-lg w-full font-medium"
+  >
+    Send Message
+  </button>
+</form>
+
           </motion.div>
 
           {/* Map Location */}
           <motion.div variants={itemVariants} className="lg:col-span-1">
-            <h3 className="text-2xl font-bold mb-6 border-b-2 border-blue-500 pb-2 inline-block">Find Us</h3>
+            <h3 className="text-2xl font-bold mb-6 border-b-2 border-blue-500 pb-2 inline-block">Locate Me</h3>
             
             <div className={`rounded-lg overflow-hidden shadow-lg ${darkMode ? "border border-gray-700" : ""}`}>
               {/* Replace the URL with your actual Google Maps embed URL */}
-              <iframe 
-                src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343008!2d-74.00425384822144!3d40.71275444716787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDAyJzQ2LjAiTiA3NMKwMDAnMTUuNiJX!5e0!3m2!1sen!2sus!4v1625761035447!5m2!1sen!2sus`} 
-                width="100%" 
-                height="250" 
-                style={{ border: 0 }} 
-                allowFullScreen="" 
-                loading="lazy" 
-                title="Office Location Map"
-              ></iframe>
+             
+
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15732.605365598902!2d76.81830524568323!3d9.668107346734457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b07b5607f65c593%3A0xc15540b5ab8a1ea7!2sPayyanithottam%2C%20Poonjar%2C%20Kerala%20686582!5e0!3m2!1sen!2sin!4v1743669818686!5m2!1sen!2sin"            width="100%" 
+            height="250"
+            style={{ border: 0 }} 
+            allowFullScreen
+            loading="lazy"
+            title="Satellite Map"
+          ></iframe>
+
+
+
+
             </div>
             
             <div className="mt-6">
-              <h4 className="text-lg font-semibold mb-3">Business Hours</h4>
+              <h4 className="text-lg font-semibold mb-3">Available Hours</h4>
               <ul className="space-y-2">
                 <li className="flex justify-between">
-                  <span>Monday - Friday</span>
+                  <span>Monday - Saturday</span>
                   <span>9:00 AM - 5:00 PM</span>
                 </li>
-                <li className="flex justify-between">
+                {/* <li className="flex justify-between">
                   <span>Saturday</span>
                   <span>10:00 AM - 2:00 PM</span>
-                </li>
+                </li> */}
                 <li className="flex justify-between">
                   <span>Sunday</span>
-                  <span>Closed</span>
+                  <span>Full Day</span>
                 </li>
               </ul>
             </div>
@@ -203,7 +225,7 @@ const ContactPage = ({ darkMode }) => {
         {/* Bottom bar */}
         <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm">© {new Date().getFullYear()} Your Company. All rights reserved.</p>
+            <p className="text-sm">© {new Date().getFullYear()} nevinnoby. All rights reserved.</p>
             <div className="flex space-x-4 mt-4 md:mt-0">
               <a href="#" className="text-sm hover:underline">Privacy Policy</a>
               <a href="#" className="text-sm hover:underline">Terms of Service</a>

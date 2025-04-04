@@ -4,7 +4,10 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Filter, Grid, List, Star, Github, ExternalLink, X, Calendar, Code, Users, Clock, ArrowUpRight, Layers, BarChart, PieChart, Zap, Book, Award, Tag } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
+import ContactPage from "@/components/ContactPage";
+import Navbar from "@/components/Navbar";
 export default function Dashboard() {
+  const [darkMode, setDarkMode] = useState(true); // Add darkMode state
   const [viewMode, setViewMode] = useState("grid");
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
@@ -16,140 +19,597 @@ export default function Dashboard() {
   const projects = [
     {
       id: 1,
-      title: "E-commerce Platform",
-      description: "A full-stack e-commerce solution with React and Node.js",
-      image: "/api/placeholder/400/250",
-      tags: ["React", "Node.js", "MongoDB"],
+      title: "Servelink",
+      description: "A full-stack online volunteering platform  with React and Node.js",
+      image: "/media/ser1.png",
+      tags: ["React", "Node.js", "MongoDB","Express"],
       featured: true,
-      github: "https://github.com/yourusername/ecommerce",
-      liveUrl: "https://ecommerce-project.com",
+      github: "https://github.com/nevinnoby/servelink",
+      liveUrl: "media/Servelink.mp4",
       category: "web",
       completionPercentage: 100,
       // Detailed information
-      startDate: "January 2023",
-      endDate: "May 2023",
-      teamSize: 3,
+      startDate: "September 2023",
+      endDate: "February 2023",
+      teamSize: 4,
       role: "Full Stack Developer",
-      problemStatement: "Create a modern e-commerce platform with real-time inventory tracking, seamless checkout process, and responsive design.",
+      problemStatement: "Create a modern volunteer connecting platform which connects volunteers across the world with different orginazions which are registered in the platform, and responsive design.Servelink is a MERN stack-based volunteering platform that connects volunteers with organizations. Volunteers can register, browse opportunities, and enroll in activities, while organizations can post and manage events. With a seamless UI and efficient user management, Servelink fosters community engagement by making volunteering accessible and organized. Seperate logins for organizations,volunteers and admins.",
       techStack: {
-        frontend: ["React", "Redux", "Tailwind CSS", "Framer Motion"],
+        frontend: ["React", "CSS", "Framer Motion"],
         backend: ["Node.js", "Express", "MongoDB", "Mongoose"],
-        deployment: ["AWS EC2", "Nginx", "GitHub Actions"],
-        tools: ["Jest", "Cypress", "Figma", "Postman"]
+        deployment: ["Minio_Bucket","GitHub Actions"],
+        tools: ["Compass", "Figma", "Postman"]
       },
       methodology: "Agile/Scrum with 2-week sprints",
       keyFeatures: [
         "User authentication with JWT",
-        "Product search with filters",
-        "Real-time inventory updates",
-        "Secure payment integration",
+        "Activity search with filters",
+        "Real-time loaction based sorting",
+        "Admin Verification for organizations",
         "Responsive design for all devices",
-        "Admin dashboard for inventory management"
+        "Organization and Volunteer Dashboards"
       ],
-      challenges: "Implementing real-time inventory updates across multiple concurrent sessions while maintaining performance",
-      solution: "Utilized Socket.io for real-time communication and implemented efficient database caching strategies to minimize load times while ensuring data consistency.",
+      challenges: "Implementing real-time coordinates updates for rendering locations and storing the images and files in the bucket.",
+      solution: "Utilized openstreet map APIs to integrate realtime locations and used Minio Bucket for storing files.",
       outcome: "Successfully launched with 99.9% uptime and 30% faster checkout process compared to previous system.",
       screenshots: [
-        "/api/placeholder/600/400",
-        "/api/placeholder/600/400",
-        "/api/placeholder/600/400"
+        "/media/Ser3.png",
+        "/media/Ser4.png",
+        "/media/Ser21.png",
+      ]
+    },
+    
+{
+  id: 2,
+  title: "Perimeter",
+  description: "A full-stack smart visitor and access management system with two mobile apps (Admin & User) and a visitor website.",
+  image: "/media/icon.png",
+  tags: ["React Native", "Expo", "Firebase", "ESP32"],
+  featured: true,
+  github: "https://github.com/Perimeter-Final-Project",
+  liveUrl: "media/Perimeter.mp4",
+  category: "mobile",
+  completionPercentage: 100,
+  startDate: "July 2024",
+  endDate: "March 2025",
+  teamSize: 4,
+  role: "Full Stack Developer",
+  problemStatement: "Develop a secure and automated visitor management system with separate mobile apps for security personnel and residents, along with a website for visitor registration. The system should provide real-time visitor tracking, pre-authorization, OTP-based authentication, RFID entry, and AI-powered number plate recognition.",
+  apps: [
+    {
+      name: "Perimeter Admin",
+      platform: "React Native (Expo)",
+      features: [
+        "Real-time visitor tracking",
+        "RFID-based access control",
+        "AI-powered number plate recognition",
+        "Automated gate opening via ESP32",
+        "Visitor verification & log history",
+        "Emergency alert system",
+        "Admin dashboard for security personnel"
       ]
     },
     {
-      id: 2,
-      title: "Weather App",
-      description: "Real-time weather forecasting using OpenWeather API",
-      image: "/api/placeholder/400/250",
-      tags: ["React", "API Integration", "Tailwind CSS"],
-      featured: false,
-      github: "https://github.com/yourusername/weather-app",
-      liveUrl: "https://weather-app-demo.com",
-      category: "web",
-      completionPercentage: 100,
-      // Detailed information
-      startDate: "June 2023",
-      endDate: "July 2023",
-      teamSize: 1,
-      role: "Frontend Developer",
-      problemStatement: "Build a user-friendly weather application that provides accurate forecasts and visualizations.",
-      techStack: {
-        frontend: ["React", "Axios", "Chart.js", "Tailwind CSS"],
-        backend: ["OpenWeather API"],
-        deployment: ["Vercel"],
-        tools: ["React Testing Library", "Figma"]
-      },
-      methodology: "Iterative Development",
-      keyFeatures: [
-        "5-day weather forecast",
-        "Interactive weather maps",
-        "Location-based weather detection",
-        "Temperature, humidity and wind charts",
-        "Weather alerts and notifications"
-      ],
-      challenges: "Handling API rate limits while providing real-time updates",
-      solution: "Implemented client-side caching and optimized API calls with debouncing techniques to reduce unnecessary requests.",
-      outcome: "Created a responsive weather app with 98% accuracy in forecasts and intuitive visualization of weather patterns.",
-      screenshots: [
-        "/api/placeholder/600/400",
-        "/api/placeholder/600/400"
+      name: "Perimeter User",
+      platform: "React Native (Expo)",
+      features: [
+        "Visitor pre-authorization via OTP",
+        "Real-time visitor arrival notifications",
+        "Guest invitation with QR code",
+        "Personalized visitor history",
+        "Vehicle management with RFID",
+        "Request gate access remotely",
+        "Secure login with Firebase authentication"
       ]
-    },
-    {
-      id: 3,
-      title: "Machine Learning Model",
-      description: "Image classification using TensorFlow",
-      image: "/api/placeholder/400/250",
-      tags: ["Python", "TensorFlow", "ML"],
-      featured: true,
-      github: "https://github.com/yourusername/ml-project",
-      liveUrl: null,
-      category: "ai",
-      completionPercentage: 100,
-      // Detailed information
-      startDate: "September 2023",
-      endDate: "December 2023",
-      teamSize: 2,
-      role: "ML Engineer",
-      problemStatement: "Develop an image classification model capable of identifying 100+ different objects with high accuracy.",
-      techStack: {
-        languages: ["Python"],
-        frameworks: ["TensorFlow", "Keras", "NumPy", "Pandas"],
-        deployment: ["Docker", "Flask API"],
-        tools: ["Jupyter Notebook", "Google Colab", "Git LFS"]
-      },
-      methodology: "Experimental approach with continuous validation",
-      keyFeatures: [
-        "Transfer learning using pre-trained models",
-        "Custom data augmentation pipeline",
-        "Fine-tuning with specialized datasets",
-        "Real-time inference capability",
-        "Confidence scoring for predictions"
-      ],
-      challenges: "Training a high-accuracy model with limited computational resources and handling class imbalance in the dataset",
-      solution: "Utilized transfer learning from EfficientNet combined with custom data augmentation techniques and weighted loss functions to improve performance on underrepresented classes.",
-      outcome: "Achieved 94.7% accuracy on test set, with model size optimized for edge deployment.",
-      screenshots: [
-        "/api/placeholder/600/400",
-        "/api/placeholder/600/400"
-      ]
-    },
-    {
-      id: 4,
-      title: "Portfolio Website",
-      description: "Personal portfolio website built with Next.js",
-      image: "/api/placeholder/400/250",
-      tags: ["Next.js", "Tailwind", "Framer Motion"],
-      featured: false,
-      github: "https://github.com/yourusername/portfolio",
-      liveUrl: "https://your-portfolio.com",
-      category: "web",
-      completionPercentage: 85,
-      startDate: "March 2024",
-      endDate: "In Progress",
-      teamSize: 1,
-      role: "Frontend Developer",
-      methodology: "Incremental Development"
     }
+  ],
+  website: {
+    platform: "Next.js",
+    features: [
+      "Visitor self-registration",
+      "Request access via OTP",
+      "Check entry rules & policies",
+      "Live visitor status updates"
+    ]
+  },
+  techStack: {
+    frontend: ["React Native","ReactJs", "Next.js", "Expo"],
+    backend: ["Firebase", "Cloudinary"],
+    deployment: ["Firebase Hosting", "Vercel Hosting", "GitHub Actions"],
+    hardware: ["ESP32", "RFID Scanner", "Smart Gate"],
+    tools: ["Expo"]
+  },
+  methodology: "Agile/Scrum with 2-week sprints",
+  keyFeatures: [
+    "Separate mobile apps for Admin & Users",
+    "Website for visitor self-registration",
+    "Real-time visitor logs & alerts",
+    "AI-powered number plate recognition",
+    "RFID & OTP-based access control",
+    "Automated gate opening with ESP32",
+    "Admin dashboard & security alerts"
+  ],
+  challenges: "Ensuring seamless communication between mobile apps, website, and hardware components while maintaining security and low latency.",
+  solution: "Implemented Firebase Firestore for real-time data updates, used ESP32 for automation, and integrated AI-powered number plate recognition for vehicle access.",
+  outcome: "Successfully deployed with a 99.9% uptime, reducing manual security workload by 60% and improving visitor authentication accuracy.",
+  screenshots: [
+    "/media/Per1.png",
+    "/media/Per2.png",
+    "/media/Per3.png"
+  ]
+},
+{
+  id: 3,
+  title: "FutureScape",
+  description: "An advanced challenge-based event platform for hackathons, coding competitions, and interactive tech challenges, built with Next.js and Supabase.",
+  image: "/media/fu.png",
+  tags: ["Next.js", "Supabase", "Real-time Leaderboard", "Hackathon"],
+  featured: true,
+  github: "https://github.com/orgs/futureScape-asthra/repositories",
+  liveUrl: "/media/f.mp4",
+  category: "event",
+  completionPercentage: 100,
+  startDate: "March 2024",
+  endDate: "April 2024",
+  teamSize: 9,
+  role: "Event Coordinator & Web Team Lead",
+  problemStatement: "FutureScape is an advanced challenge-based event platform built with Next.js and Supabase, designed for hackathons, coding competitions, and interactive tech challenges. It features a real-time leaderboard, admin-controlled eliminations, and automated challenge progression. Participants engage in diverse challenges like MCQs, blind coding, debugging, and a final treasure hunt, each with timers and scoring mechanisms. Supabase handles authentication, database storage, and real-time updates, ensuring a seamless experience. FutureScape is scalable, customizable, and optimized for fair competition. 🚀",
+  systemFeatures: [
+    {
+      name: "Competition Structure",
+      features: [
+        "MCQ challenges",
+        "Blind coding rounds",
+        "Debugging tasks",
+        "Final treasure hunt"
+      ]
+    },
+    {
+      name: "Platform Features",
+      features: [
+        "Real-time leaderboard updates",
+        "Admin-controlled eliminations",
+        "Automated challenge progression",
+        "Participant authentication via Supabase"
+      ]
+    }
+  ],
+  techStack: {
+    frontend: ["Next.js", "Tailwind CSS"],
+    backend: ["Supabase", "Node.js"],
+    tools: ["Figma", "Postman", "GitHub", "Vercel"]
+  },
+  methodology: "Agile development with sprint-based task allocation",
+  keyFeatures: [
+    "Scalable and customizable competition platform",
+    "Real-time updates using Supabase",
+    "Admin panel for challenge and participant management",
+    "Automated scoring and fair competition rules"
+  ],
+  challenges: "Ensuring real-time updates, handling multiple concurrent users, and implementing automated challenge progression.",
+  solution: "Leveraged Supabase for real-time database operations and Next.js for optimized frontend performance.",
+  outcome: "Successfully hosted the event with 100+ participants, ensuring fair play and seamless challenge execution.",
+  screenshots: [
+    "/media/fu1.png",
+    "/media/fu2.png",
+    "/media/fu3.png"
+  ]
+}
+
+,
+{
+  id: 4,
+  title: "Invento",
+  description: "A smart inventory management system for seamless stock control.",
+  image: "/media/In2.png",
+  tags: ["PHP", "MySQL", "Bootstrap", "JavaScript"],
+  featured: true,
+  github: "https://github.com/nevinnoby/Invento",
+  liveUrl: "media/Invento.mp4",
+  category: "web",
+  completionPercentage: 100,
+  startDate: "October 2024",
+  endDate: "November 2024",
+  teamSize: 5,
+  role: "Full Stack Developer",
+  problemStatement: "Develop an efficient inventory management system to help businesses track stock levels in real time, prevent overstocking or stockouts, and ensure seamless product management with a secure and responsive interface.",
+  systemFeatures: [
+    {
+      name: "Product Management",
+      features: [
+        "Add new products",
+        "Edit existing product details",
+        "Delete outdated products",
+        "Categorize inventory for better organization"
+      ]
+    },
+    {
+      name: "Stock Tracking",
+      features: [
+        "Real-time stock level monitoring",
+        "Low-stock alerts and notifications",
+        "Stock history and movement tracking",
+        "Prevent overstocking and stockouts"
+      ]
+    },
+    {
+      name: "User Authentication",
+      features: [
+        "Secure login for authorized users",
+        "Role-based access control",
+        "Encrypted credentials storage",
+        "Admin dashboard for user management"
+      ]
+    }
+  ],
+  techStack: {
+    frontend: ["Bootstrap", "JavaScript", "CSS"],
+    backend: ["PHP", "MySQL"],
+    deployment: ["Apache Server", "GitHub Actions"],
+    tools: ["Postman", "Figma", "phpMyAdmin"]
+  },
+  methodology: "Agile/Scrum with weekly iterations",
+  keyFeatures: [
+    "Comprehensive product and stock management",
+    "Real-time inventory tracking with alerts",
+    "Role-based user authentication",
+    "Responsive design for mobile and desktop",
+    "Seamless integration with MySQL database",
+    "Dynamic updates with PHP backend"
+  ],
+  challenges: "Implementing real-time stock updates efficiently while maintaining data integrity and security.",
+  solution: "Utilized AJAX for asynchronous updates, MySQL for structured data management, and Bootstrap for a responsive UI across devices.",
+  outcome: "Successfully reduced stock management errors by 40%, improved tracking efficiency, and enabled real-time inventory control.",
+  screenshots: [
+    "/media/In1.png",
+    "/media/In2.png",
+    "/media/In3.png"
+  ]
+},
+{
+  id: 5,
+  title: "Portfolio",
+  description: "A personal portfolio website showcasing projects, skills, and experience with interactive animations.",
+  image: "/media/P1.png",
+  tags: ["HTML", "CSS", "JavaScript", "Animations"],
+  featured: true,
+  github: "https://github.com/nevinnoby/My_Portfolio",
+  liveUrl: "https://nevinnoby.github.io/My_Portfolio/#",
+  category: "web",
+  completionPercentage: 100,
+  startDate: "January 2023",
+  endDate: "March 2023",
+  teamSize: 1,
+  role: "Frontend Developer",
+  problemStatement: "Create an engaging and visually appealing portfolio to showcase projects, skills, and achievements in an interactive way.",
+  systemFeatures: [
+    {
+      name: "Portfolio Sections",
+      features: [
+        "Introduction with interactive animations",
+        "Projects showcase with live previews",
+        "Skills section with progress bars",
+        "Contact form with email integration"
+      ]
+    },
+    {
+      name: "Responsive Design",
+      features: [
+        "Fully optimized for mobile, tablet, and desktop",
+        "Smooth transitions and hover effects",
+        "Dark mode for better accessibility"
+      ]
+    },
+    {
+      name: "Animation Effects",
+      features: [
+        "Scroll animations using GSAP",
+        "Parallax effects for immersive experience",
+        "Hover-based animations for interactive UI"
+      ]
+    }
+  ],
+  techStack: {
+    frontend: ["HTML", "CSS", "JavaScript"],
+    animation: ["GSAP", "CSS Keyframes"],
+    tools: ["Figma", "VS Code", "GitHub"]
+  },
+  methodology: "Iterative Design Process",
+  keyFeatures: [
+    "Fully responsive layout",
+    "Smooth animations and transitions",
+    "Showcase of projects with live previews",
+    "Interactive UI with hover effects",
+    "Custom-built animations using GSAP",
+    "Optimized for fast loading speed"
+  ],
+  challenges: "Ensuring smooth animations without performance issues on low-end devices.",
+  solution: "Used GSAP for optimized animations and lazy loading techniques for faster performance.",
+  outcome: "Successfully created a visually engaging portfolio, increasing project visibility and professional reach.",
+  screenshots: [
+    "/media/P1.png",
+    "/media/P2.png",
+    "/media/P3.png"
+  ]
+},
+{
+  id: 6,
+  title: "Travel",
+  description: "A modern and highly responsive travel website for booking holiday destinations with smooth animations and filtering options.",
+  image: "/media/tr3.png",
+  tags: ["React", "CSS", "AOS", "Responsive UI"],
+  featured: false,
+  github: "https://github.com/nevinnoby/travel-webapp",
+  liveUrl: "https://nevinnoby.github.io/travel-webapp/",
+  category: "web",
+  completionPercentage: 100,
+  startDate: "August 2024",
+  endDate: "August 2024",
+  teamSize: 1,
+  role: "Frontend Developer",
+  problemStatement: "Develop a visually appealing and interactive travel website that allows users to browse and filter holiday destinations effortlessly.",
+  systemFeatures: [
+    {
+      name: "UI/UX Design",
+      features: [
+        "Modern and clean interface with smooth transitions",
+        "Highly responsive layout for all screen sizes",
+        "Filter system for sorting destinations by category"
+      ]
+    },
+    {
+      name: "Animations & Effects",
+      features: [
+        "AOS (Animate on Scroll) for smooth animations",
+        "Parallax scrolling effects",
+        "Hover-based interactive UI elements"
+      ]
+    }
+  ],
+  techStack: {
+    frontend: ["React", "CSS", "AOS", "Framer Motion"],
+    tools: ["Figma", "VS Code", "GitHub"]
+  },
+  methodology: "Component-Based Development",
+  keyFeatures: [
+    "Fully responsive design for mobile, tablet, and desktop",
+    "Smooth animations and transitions",
+    "Filter categories for easy navigation",
+    "Optimized for fast performance",
+    "Interactive hover effects"
+  ],
+  challenges: "Ensuring smooth performance despite heavy animations and optimizing responsiveness across all devices.",
+  solution: "Used AOS for lightweight animations and implemented lazy loading techniques for better performance.",
+  outcome: "Successfully developed a high-performance travel website with a sleek UI and smooth animations.",
+  screenshots: [
+    "/media/tr3.png",
+    "/media/tr2.png",
+    "/media/tr1.png"
+  ]
+},
+{
+  id: 7,
+  title: "ElectraRide",
+  description: "A responsive front-end platform for electric vehicle users to explore charging stations and EV-related details with smooth animations and intuitive UI.",
+  image: "/media/Ele.png",
+  tags: ["React", "CSS", "AOS", "EV", "Responsive UI"],
+  featured: false,
+  github: "https://github.com/nevinnoby/ElectraRide",
+  liveUrl: "https://electraride.vercel.app/",
+  category: "web",
+  completionPercentage: 100,
+  startDate: "January 2024",
+  endDate: "February 2024",
+  teamSize: 1,
+  role: "Frontend Developer",
+  problemStatement: "Design a clean and interactive platform that helps users discover electric vehicle charging stations and essential information, with a user-friendly responsive interface.",
+  systemFeatures: [
+    {
+      name: "UI/UX Design",
+      features: [
+        "Clean layout tailored for EV enthusiasts",
+        "Highly responsive interface across all devices",
+        "Filter functionality for easy search of EV stations"
+      ]
+    },
+    {
+      name: "Animations & Effects",
+      features: [
+        "Smooth scroll-based animations using AOS",
+        "Modern card design with hover effects",
+        "Seamless navigation transitions"
+      ]
+    }
+  ],
+  techStack: {
+    frontend: ["React", "CSS", "AOS", "Framer Motion"],
+    tools: ["Figma", "VS Code", "GitHub"]
+  },
+  methodology: "Component-Based Development",
+  keyFeatures: [
+    "EV charging station discovery interface",
+    "Responsive grid layout for stations and features",
+    "Smooth animations enhancing user experience",
+    "Filterable search based on categories or location",
+    "Performance optimized and visually rich design"
+  ],
+  challenges: "Building a scalable component structure while maintaining animation smoothness and mobile responsiveness.",
+  solution: "Utilized modular component design and animation libraries like AOS with optimization techniques.",
+  outcome: "Successfully developed a highly responsive EV platform interface ready for integration with backend APIs.",
+  screenshots: [
+    "/media/El1.png",
+    "/media/El2.png",
+    "/media/El3.png"
+  ]
+}
+,{
+  id: 8,
+  title: "Tomato",
+  description: "A highly responsive and animated UI for an online food ordering platform built using React. It features smooth transitions, category-based sorting, and a complete navigation bar.",
+  image: "/media/T11.png",
+  tags: ["React", "CSS", "Animations", "Responsive Design"],
+  featured: false,
+  github: "https://github.com/nevinnoby/food-app",
+  liveUrl: "https://food-app-two-rouge.vercel.app/",
+  category: "web",
+  completionPercentage: 40,
+  startDate: "January 2024",
+  endDate: "February 2024",
+  teamSize: 1,
+  role: "Frontend Developer",
+  problemStatement: "Design an engaging and user-friendly frontend for a food ordering platform with category sorting, smooth animations, and mobile responsiveness.",
+  systemFeatures: [
+    {
+      name: "User Interface",
+      features: [
+        "Attractive and responsive layout",
+        "Category-based food filtering",
+        "Reusable card components for dishes",
+        "Fixed and responsive navbar"
+      ]
+    },
+    {
+      name: "User Experience",
+      features: [
+        "Smooth animations and transitions",
+        "Hover effects and interactive design",
+        "Mobile-friendly layout",
+        "Scalable component structure"
+      ]
+    }
+  ],
+  techStack: {
+    frontend: ["React", "CSS"],
+    tools: ["VS Code", "GitHub"]
+  },
+  methodology: "Component-based design for modular UI",
+  keyFeatures: [
+    "Dynamic food category sorting",
+    "Fully designed navbar with navigation links",
+    "Responsive across all device sizes",
+    "Animated UI elements using AOS"
+  ],
+  challenges: "Creating a scalable component structure while maintaining smooth animation and responsiveness.",
+  solution: "Used animation libraries like AOS and built reusable components to handle different food sections and UI blocks.",
+  outcome: "Successfully developed a polished frontend UI ready for backend integration and deployment.",
+  screenshots: [
+    "/media/t1.png",
+    "/media/t2.png",
+    "/media/t3.png"
+  ]
+}
+,
+{
+  id: 9,
+  title: "Tic Tac Toe Game",
+  description: "A classic Tic Tac Toe game built with HTML, CSS, and JavaScript, enhanced with smooth animations and responsive design for all screen sizes.",
+  image: "/media/tic.png",
+  tags: ["HTML", "CSS", "JavaScript", "Game", "Animation"],
+  featured: false,
+  github: "https://github.com/nevinnoby/Tic_Tac_Toe",
+  liveUrl: "https://nevinnoby.github.io/Tic_Tac_Toe/",
+  category: "game",
+  completionPercentage: 100,
+  startDate: "August 2023",
+  endDate: "August 2023",
+  teamSize: 1,
+  role: "Frontend Developer",
+  problemStatement: "Create a fun, interactive, and visually appealing Tic Tac Toe game playable across all devices with a clean and minimal UI.",
+  systemFeatures: [
+    {
+      name: "Game Mechanics",
+      features: [
+        "2-player game mode",
+        "Automatic win/tie detection",
+        "Reset functionality"
+      ]
+    },
+    {
+      name: "Visuals and Animations",
+      features: [
+        "CSS animations for turn transitions",
+        "Interactive UI with hover effects",
+        "Responsive design for mobile and desktop"
+      ]
+    }
+  ],
+  techStack: {
+    frontend: ["HTML", "CSS", "JavaScript"],
+    tools: ["VS Code", "GitHub"]
+  },
+  methodology: "Vanilla JS development with modular design",
+  keyFeatures: [
+    "Interactive grid-based gameplay",
+    "Winning logic implemented in pure JS",
+    "Smooth animations and hover effects",
+    "Responsive layout across all devices"
+  ],
+  challenges: "Managing game state and ensuring accurate win/tie conditions without a framework.",
+  solution: "Used JavaScript event listeners and array-based game logic to handle state and DOM updates.",
+  outcome: "A lightweight, fast-loading game with engaging visuals and a smooth user experience.",
+  screenshots: [
+    "/media/ti1.png",
+    "/media/ti2.png"
+  ]
+}
+,
+{
+  id: 10,
+  title: "Weather Widget",
+  description: "A responsive and animated weather widget that fetches real-time weather data based on user location input using OpenWeather API.",
+  image: "/media/wea.png",
+  tags: ["HTML", "CSS", "JavaScript", "OpenWeather API", "Animation"],
+  featured: false,
+  github: "https://github.com/nevinnoby/weather-app",
+  liveUrl: "https://nevinnoby.github.io/weather-app/",
+  category: "widget",
+  completionPercentage: 100,
+  startDate: "September 2023",
+  endDate: "September 2023",
+  teamSize: 1,
+  role: "Frontend Developer",
+  problemStatement: "Design a sleek weather widget that allows users to check the weather of any location with animated weather icons and real-time updates.",
+  systemFeatures: [
+    {
+      name: "Weather Display",
+      features: [
+        "City search functionality",
+        "Real-time temperature display",
+        "Animated icons for sunny, rainy, cloudy, etc.",
+        "Displays humidity and wind speed"
+      ]
+    },
+    {
+      name: "User Experience",
+      features: [
+        "Smooth animations",
+        "Responsive design for all devices",
+        "Auto-clear of input after search",
+        "Error handling for invalid city names"
+      ]
+    }
+  ],
+  techStack: {
+    frontend: ["HTML", "CSS", "JavaScript"],
+    api: ["OpenWeather API"],
+    tools: ["VS Code", "GitHub"]
+  },
+  methodology: "Single-page widget with modular JavaScript functions",
+  keyFeatures: [
+    "Live weather data fetching",
+    "Search by city name",
+    "Animated weather icons",
+    "Humidity and wind speed display",
+    "Responsive and minimal UI"
+  ],
+  challenges: "Mapping the API's weather data to appropriate visuals and maintaining a smooth UI on all screen sizes.",
+  solution: "Used OpenWeather's icon set and condition codes with JavaScript conditionals for dynamic UI rendering.",
+  outcome: "A visually appealing and functional weather widget, perfect for integrating into larger applications or personal dashboards.",
+  screenshots: [
+    "/media/w1.png",
+    "/media/w2.png"
+  ]
+}
   ];
 
   // Trigger stats animation on initial load
@@ -245,6 +705,7 @@ export default function Dashboard() {
   };
 
   return (
+    
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
       {/* Hero Section with Parallax Effect */}
       <motion.div 
@@ -266,6 +727,7 @@ export default function Dashboard() {
     transition={{ delay: 0.1, duration: 0.5 }}
     className="mb-8"
   >
+  
     <button 
       onClick={() => window.location.href = '/'}
       className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm transition-all duration-300"
@@ -994,12 +1456,9 @@ export default function Dashboard() {
       </AnimatePresence>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-gray-300 py-8">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <p>© {new Date().getFullYear()} Your Name. All rights reserved.</p>
-          <p className="mt-2">Built with Next.js and Tailwind CSS</p>
-        </div>
-      </footer>
+     
+        <ContactPage  darkMode={darkMode} />
+      
     </div>
   );
 }
