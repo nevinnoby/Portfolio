@@ -4,7 +4,11 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaPhone, FaGithub, FaLinkedin, FaTwitter, FaMapMarkerAlt, FaClock, FaArrowUp, FaWhatsapp } from 'react-icons/fa';
 
-const ContactPage = ({ darkMode }) => {
+interface ContactPageProps {
+  darkMode: boolean;
+}
+
+const ContactPage = ({ darkMode }: ContactPageProps) => {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Demo coordinates - replace with your actual location

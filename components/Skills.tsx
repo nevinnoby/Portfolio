@@ -143,7 +143,7 @@ const languages = [
   },
 ];
 
-const SkillCard = ({ skill, index, darkMode }) => {
+const SkillCard: React.FC<{ skill: typeof skills[0]; index: number; darkMode: boolean }> = ({ skill, index, darkMode }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -224,7 +224,14 @@ const SkillCard = ({ skill, index, darkMode }) => {
   );
 };
 
-const LanguageCard = ({ language, index }) => {
+interface Language {
+  name: string;
+  level: number;
+  proficiency: string;
+  color: string;
+}
+
+const LanguageCard: React.FC<{ language: Language; index: number }> = ({ language, index }) => {
   return (
     <motion.div
       className="bg-gray-800 rounded-xl p-6"
@@ -286,7 +293,7 @@ const ExperienceLevel = () => {
   );
 };
 
-const SkillsFilter = ({ activeFilter, setActiveFilter }) => {
+const SkillsFilter: React.FC<{ activeFilter: string; setActiveFilter: (filter: string) => void }> = ({ activeFilter, setActiveFilter }) => {
   const filters = ["All", "Frontend", "Backend", "Computer Science", "Tools", "Languages"];
 
   return (
@@ -315,7 +322,7 @@ const SkillsFilter = ({ activeFilter, setActiveFilter }) => {
   );
 };
 
-const SkillsComparison = ({ skills }) => {
+const SkillsComparison: React.FC<{ skills: typeof skills }> = ({ skills }) => {
   // Select a subset of skills for the comparison chart to avoid overcrowding
   const topSkills = skills.slice(0, 6);
 
