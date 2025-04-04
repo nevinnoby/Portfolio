@@ -12,7 +12,14 @@ interface CoverProps {
 }
 
 // Custom typing animation component
-const TypeWriter = ({ text, className, delay = 0, speed = 0.05 }) => {
+interface TypeWriterProps {
+  text: string;
+  className?: string;
+  delay?: number;
+  speed?: number;
+}
+
+const TypeWriter = ({ text, className, delay = 0, speed = 0.05 }: TypeWriterProps) => {
   const controls = useAnimation();
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -52,14 +59,14 @@ const TypeWriter = ({ text, className, delay = 0, speed = 0.05 }) => {
 const Cover = ({ darkMode }: CoverProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const controls = useAnimation();
   
   useEffect(() => {
     setIsLoaded(true);
     controls.start("visible");
     
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: { clientX: number; clientY: number; }) => {
       if (containerRef.current) {
         const { left, top, width, height } = containerRef.current.getBoundingClientRect();
         const x = ((e.clientX - left) / width) - 0.5;
@@ -85,7 +92,7 @@ const Cover = ({ darkMode }: CoverProps) => {
   };
 
   const particleVariants = {
-    animate: (i) => ({
+    animate: (i: number) => ({
       x: [0, Math.random() * 40 - 20],
       y: [0, Math.random() * 40 - 20],
       opacity: [0.4, 0.8, 0.4],
@@ -93,7 +100,7 @@ const Cover = ({ darkMode }: CoverProps) => {
       transition: {
         duration: Math.random() * 5 + 10,
         repeat: Infinity,
-        repeatType: "reverse",
+        repeatType: "reverse" as const,
         delay: i * 0.2,
       }
     })
@@ -297,7 +304,7 @@ const Cover = ({ darkMode }: CoverProps) => {
             <motion.div
               variants={itemVariants}
               className="flex flex-wrap gap-4 mb-12"
-            ><Link href="/Showcase" to={''}>
+            ><Link href="/Showcase">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, SetStateAction, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, Key } from "react";
+import { useState, useEffect, SetStateAction, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Filter, Grid, List, Star, Github, ExternalLink, X, Calendar, Code, Users, Clock, ArrowUpRight, Layers, BarChart, PieChart, Zap, Book, Award, Tag } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
@@ -11,7 +11,32 @@ export default function Dashboard() {
   const [viewMode, setViewMode] = useState("grid");
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedProject, setSelectedProject] = useState(null);
+  interface Project {
+    id: number;
+    title: string;
+    description: string;
+    image: string;
+    tags: string[];
+    featured: boolean;
+    github?: string;
+    liveUrl?: string;
+    category: string;
+    completionPercentage: number;
+    startDate: string;
+    endDate: string;
+    teamSize: number;
+    role: string;
+    methodology: string;
+    problemStatement: string;
+    techStack: { [key: string]: string[] };
+    keyFeatures: string[];
+    challenges: string;
+    solution: string;
+    outcome: string;
+    screenshots: string[];
+  }
+
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [animateStats, setAnimateStats] = useState(false);
   const [activeStatCard, setActiveStatCard] = useState(null);
   
@@ -768,7 +793,7 @@ export default function Dashboard() {
           {/* Projects Stats Card */}
           <motion.div 
             initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            // animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3 }}
             variants={statCardVariants}
             animate={activeStatCard === "projects" ? "expanded" : "collapsed"}
@@ -871,7 +896,7 @@ export default function Dashboard() {
           {/* Featured Projects Stats Card */}
           <motion.div 
             initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            // animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4 }}
             variants={statCardVariants}
             animate={activeStatCard === "featured" ? "expanded" : "collapsed"}
@@ -979,7 +1004,7 @@ export default function Dashboard() {
           {/* Technologies Stats Card */}
           <motion.div 
             initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            // animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5 }}
             variants={statCardVariants}
             animate={activeStatCard === "tech" ? "expanded" : "collapsed"}
@@ -1412,7 +1437,7 @@ export default function Dashboard() {
                         <div key={index} className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
                           <img 
                             src={screenshot} 
-                            alt={`${selectedProject.title} screenshot ${index + 1}`}
+                            alt={`${selectedProject.title} screenshot ${(index as number) + 1}`}
                             className="w-full h-40 object-cover"
                           />
                         </div>

@@ -16,7 +16,11 @@ import Head from "next/head";
 import Cover from "@/components/Cover";
 import EventCard from "@/components/EventCard";
 // Updated Projects component with auto-scrolling
-const Projects = ({ isDark }) => {
+interface ProjectsProps {
+  isDark: boolean;
+}
+
+const Projects = ({ isDark }: ProjectsProps) => {
   const [currentProject, setCurrentProject] = useState(0);
   const [isInView, setIsInView] = useState(false);
   
@@ -66,7 +70,7 @@ const Projects = ({ isDark }) => {
 
   // Auto-scroll functionality
   useEffect(() => {
-    let interval;
+    let interval: string | number | NodeJS.Timeout | undefined;
     
     if (isInView) {
       interval = setInterval(() => {

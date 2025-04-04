@@ -80,12 +80,12 @@ const theme = {
 
 const EventCard = ({ darkMode = true }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const cardRef = useRef(null);
-  const [sparkles, setSparkles] = useState([]);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [sparkles, setSparkles] = useState<{ id: string; x: number; y: number; scale: number; duration: number }[]>([]);
   const [showClickHint, setShowClickHint] = useState(false);
   
   // For demo particles
-  const [particles, setParticles] = useState([]);
+  const [particles, setParticles] = useState<{ id: number; x: number; y: number; size: number; color: string }[]>([]);
   
   // Select the current theme based on darkMode prop
   const currentTheme = darkMode ? theme.dark : theme.light;
@@ -157,7 +157,7 @@ const EventCard = ({ darkMode = true }) => {
   };
 
   // Enhanced 3D tilt effect on hover
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: { clientX: number; clientY: number; }) => {
     if (!cardRef.current || !isHovered) return;
     
     const rect = cardRef.current.getBoundingClientRect();
@@ -326,7 +326,7 @@ const EventCard = ({ darkMode = true }) => {
               animate={{ textShadow: isHovered ? `0 0 8px ${darkMode ? "rgba(255,255,255,0.5)" : "rgba(79,70,229,0.5)"}` : "none" }}
               transition={{ duration: 0.5 }}
             >
-              FutureScape 2025   -} Click to View
+              FutureScape 2025   --- Click to View
             </motion.span>
             
           </motion.h3>
