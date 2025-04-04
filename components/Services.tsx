@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import Link from "next/link";
 
+
 // Types
 interface Service {
-  link: Url;
+  link: string;
   title: string;
   description: string;
   icon: string;

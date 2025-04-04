@@ -4,7 +4,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link as ScrollLink } from "react-scroll";
 import Link from "next/link";
 
-const Navbar = ({ activeSection, setActiveSection, darkMode, setDarkMode }) => {
+interface NavbarProps {
+  activeSection: string;
+  setActiveSection: (section: string) => void;
+  darkMode: boolean;
+  setDarkMode: (mode: boolean) => void;
+}
+
+const Navbar = ({ activeSection, setActiveSection, darkMode, setDarkMode }: NavbarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Mobile menu toggle

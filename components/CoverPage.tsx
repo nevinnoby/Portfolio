@@ -65,7 +65,7 @@ const CoverPage = () => {
   const aboutOpacity = useTransform(scrollY, [200, 600], [0, 1]);
 
   // Mouse move handler with debounce effect
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: { clientX: any; clientY: any; }) => {
     setMousePosition({ x: e.clientX, y: e.clientY });
   };
 
@@ -89,7 +89,7 @@ const CoverPage = () => {
   // Letter animation variants
   const letterVariants = {
     hidden: { opacity: 0, y: -20 },
-    visible: (i) => ({
+    visible: (i: number) => ({
       opacity: 1,
       y: 0,
       transition: {
