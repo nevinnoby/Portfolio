@@ -626,16 +626,19 @@ export default function Dashboard() {
   const techCount = uniqueTechnologies.length;
   
   // Category stats for expanded view
-  const categoryStats = {};
+  const categoryStats: { [key: string]: number } = {};
+
   projects.forEach(project => {
     if (!categoryStats[project.category]) {
       categoryStats[project.category] = 0;
     }
     categoryStats[project.category]++;
   });
+  
 
   // Tech distribution for expanded view
-  const techDistribution = {};
+  const techDistribution: { [key: string]: number } = {};
+
   projects.forEach(project => {
     project.tags.forEach(tag => {
       if (!techDistribution[tag]) {
@@ -644,6 +647,7 @@ export default function Dashboard() {
       techDistribution[tag]++;
     });
   });
+  
 
   // Filter and search projects 
   const filteredProjects = projects.filter(project => {
