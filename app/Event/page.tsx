@@ -780,11 +780,16 @@ With 30+ participants and a ₹5000 prize pool, Participants advanced through a 
                           completed={challenge.totalCompleted} 
                           total={challenge.totalChallenges} 
                           color={
-                            challenge.type === 'web' ? 'bg-blue-600' :
-                            challenge.type === 'design' ? 'bg-pink-600' :
-                            challenge.type === 'development' ? 'bg-green-600' :
-                            'bg-purple-600'
+                            challenge.type === 'MCQ Challenge' ? 'bg-blue-600' :
+                            challenge.type === 'Wikipedia Navigation' ? 'bg-pink-600' :
+                            challenge.type === 'Tech Treasure Hunt' ? 'bg-green-600' :
+                            challenge.type === 'Blind Coding' ? 'bg-red-600' :
+                            challenge.type === 'Password Maker' ? 'bg-yellow-600' :
+                            challenge.type === 'Debugging Challenge' ? 'bg-orange-600' :
+                            challenge.type === 'Final Treasure Hunt' ? 'bg-indigo-600' :
+                            'bg-purple-600' // default color fallback
                           }
+                          
                         />
                       </div>
                     ))}
