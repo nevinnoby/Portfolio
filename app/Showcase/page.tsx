@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, SetStateAction, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, Key } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Filter, Grid, List, Star, Github, ExternalLink, X, Calendar, Code, Users, Clock, ArrowUpRight, Layers, BarChart, PieChart, Zap, Book, Award, Tag } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
@@ -688,10 +688,11 @@ export default function Dashboard() {
   };
 
   // Handle opening project details
-  const openProjectDetails = (project) => {
+  const openProjectDetails = (project: any) => {
     setSelectedProject(project);
-    document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
+    document.body.style.overflow = "hidden";
   };
+  
 
   // Handle closing project details
   const closeProjectDetails = () => {
@@ -700,7 +701,7 @@ export default function Dashboard() {
   };
 
   // Handle stat card toggling
-  const toggleStatCard = (cardName) => {
+  const toggleStatCard = (cardName: any) => {
     if (activeStatCard === cardName) {
       setActiveStatCard(null);
     } else {
@@ -1278,7 +1279,7 @@ export default function Dashboard() {
                 <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent">
                   <h2 className="text-3xl font-bold text-white mb-2">{selectedProject.title}</h2>
                   <div className="flex flex-wrap gap-2">
-                    {selectedProject.tags.map((tag, index) => (
+                    {selectedProject.tags.map((tag: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined, index: Key | null | undefined) => (
                       <span 
                         key={index} 
                         className="px-2 py-1 text-xs bg-purple-500/70 text-white rounded-lg"
@@ -1350,7 +1351,7 @@ export default function Dashboard() {
                         <div key={category} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
                           <h4 className="text-lg font-medium text-purple-600 dark:text-purple-400 mb-2 capitalize">{category}</h4>
                           <div className="flex flex-wrap gap-2">
-                            {technologies.map((tech, index) => (
+                            {technologies.map((tech: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined, index: Key | null | undefined) => (
                               <span 
                                 key={index} 
                                 className="inline-flex items-center px-2.5 py-1 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm"
@@ -1369,7 +1370,7 @@ export default function Dashboard() {
                   <div className="mb-8">
                     <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">Key Features</h3>
                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
-                      {selectedProject.keyFeatures.map((feature, index) => (
+                      {selectedProject.keyFeatures.map((feature: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined, index: Key | null | undefined) => (
                         <li key={index} className="flex items-start">
                           <div className="flex-shrink-0 h-5 w-5 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mt-0.5 mr-2">
                             <div className="h-2 w-2 rounded-full bg-purple-600 dark:bg-purple-400"></div>
@@ -1407,7 +1408,7 @@ export default function Dashboard() {
                   <div className="mb-4">
                     <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">Screenshots</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      {selectedProject.screenshots.map((screenshot, index) => (
+                      {selectedProject.screenshots.map((screenshot: string | undefined, index: Key | null | undefined) => (
                         <div key={index} className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
                           <img 
                             src={screenshot} 
