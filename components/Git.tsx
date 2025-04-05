@@ -70,7 +70,7 @@ const Git = ({ isDark }: GitProps) => {
           >
             <motion.img
               src={githubStats?.avatar_url}
-              alt="GitHub Avatar"
+              alt="Maximum Limit Reached will resets in 12Hrs"
               className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white sm:w-40 sm:h-40"
               whileHover={{ scale: 1.1 }}
             />
