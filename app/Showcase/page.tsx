@@ -1178,7 +1178,7 @@ export default function Dashboard() {
           variants={containerVariants}
           initial="hidden"
           animate="show"
-          className={viewMode === "grid" ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" : "flex flex-col space-y-6"}
+          className={viewMode === "grid" ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" : "flex flex-col space-y-6"}
         >
           {filteredProjects.length > 0 ? (
             filteredProjects.map((project) => (
@@ -1186,14 +1186,14 @@ export default function Dashboard() {
                 key={project.id}
                 variants={itemVariants}
                 className={`bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 
-                  ${viewMode === "list" ? "flex flex-col md:flex-row" : ""}`}
+                  ${viewMode === "list" ? "flex flex-col sm:flex-row" : ""}`}
               >
-                <div className={`${viewMode === "list" ? "md:w-64 flex-shrink-0" : ""}`}>
+                <div className={`${viewMode === "list" ? "sm:w-64 flex-shrink-0" : ""}`}>
                   <div className="relative group">
                     <img 
                       src={project.image} 
                       alt={project.title} 
-                      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" 
+                      className="w-full h-48 sm:h-56 object-cover transition-transform duration-300 group-hover:scale-105" 
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                       <div className="p-4 w-full">

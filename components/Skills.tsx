@@ -374,6 +374,8 @@ interface SkillsProps {
   darkMode: boolean;
 }
 
+
+// Add responsive classes to ensure proper layout on mobile
 const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
   const [activeFilter, setActiveFilter] = useState("All");
 
@@ -381,7 +383,7 @@ const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
 
   if (activeFilter === "Languages") {
     filteredContent = (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6"> {/* Adjusted for responsiveness */}
         {languages.map((language, index) => (
           <LanguageCard key={language.name} language={language} index={index} />
         ))}
@@ -394,7 +396,7 @@ const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
         : skills.filter((skill) => skill.category === activeFilter);
 
     filteredContent = (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"> {/* Adjusted for responsiveness */}
         {filteredSkills.map((skill, index) => (
           <SkillCard
             key={skill.name}
@@ -409,14 +411,14 @@ const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
 
   return (
     <div
-      className={`min-h-screen py-20 px-6 ${
+      className={`min-h-screen py-20 px-4 sm:px-6 lg:px-8 ${
         darkMode
           ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white"
           : "bg-gradient-to-br from-gray-100 via-gray-200 to-gray-100 text-gray-900"
       }`}
     >
       <motion.div
-        className="max-w-6xl mx-auto"
+        className="container mx-auto px-4 sm:px-6 lg:px-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -429,7 +431,7 @@ const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
           transition={{ duration: 0.8 }}
         >
           <motion.h1
-            className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
@@ -465,35 +467,6 @@ const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
 
         {/* Skills Comparison Chart - Only show for tech skills, not languages */}
         {activeFilter !== "Languages" && <SkillsComparison skills={skills} />}
-
-        {/* Call to Action */}
-        {/* <motion.div
-          className="mt-20 text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <h3 className="text-2xl font-bold mb-4">Looking to collaborate?</h3>
-          <p
-            className={`mb-6 ${
-              darkMode ? "text-gray-400" : "text-gray-600"
-            }`}
-          >
-            I'm always open to discussing new projects and opportunities.
-          </p>
-          <motion.button
-            className={`px-8 py-3 rounded-full font-medium transition-all duration-300 ${
-              darkMode
-                ? "bg-purple-600 hover:bg-purple-700 text-white"
-                : "bg-purple-500 hover:bg-purple-600 text-white"
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Get In Touch
-          </motion.button>
-        </motion.div> */}
       </motion.div>
     </div>
   );

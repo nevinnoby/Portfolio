@@ -104,7 +104,7 @@ const Projects = ({ isDark }: ProjectsProps) => {
 
   return (
     <div className="w-full">
-      <div className="relative h-[500px] md:h-[600px]">
+      <div className="relative h-[500px] md:h-[600px] lg:h-[700px]">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentProject}
@@ -122,7 +122,7 @@ const Projects = ({ isDark }: ProjectsProps) => {
       src={projects[currentProject].image} 
       alt={projects[currentProject].title}
       fill={true}
-      sizes="(max-width: 768px) 100vw, 500px"
+      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
       className="object-cover rounded-lg"
       priority
     />
@@ -135,7 +135,7 @@ const Projects = ({ isDark }: ProjectsProps) => {
               
               {/* Project Info */}
               <div className={`flex flex-col justify-center text-left ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
-                <h3 className="text-3xl font-bold mb-4">{projects[currentProject].title}</h3>
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">{projects[currentProject].title}</h3>
                 <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                   {projects[currentProject].description}
                 </p>
@@ -155,7 +155,7 @@ const Projects = ({ isDark }: ProjectsProps) => {
                 </div>
                 
                 {/* Action Buttons */}
-                <div className="flex gap-4">
+                <div className="flex flex-wrap gap-4">
                   <button
                     onClick={() => {
                       const videoUrl = projects[currentProject].video;
@@ -518,6 +518,24 @@ export default function Home() {
 
 <EventCard darkMode={darkMode}/>
 
+{/* Skills Section */}
+<Element name="skills">
+          <motion.section
+            id="skills"
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="py-20 text-center px-4 sm:px-6 lg:px-8"
+          >
+            <div className="container mx-auto">
+            </div>
+           
+
+          </motion.section>
+        </Element>
+
+        <Skills darkMode={darkMode} />
         {/* Services Section */}
         <Element name="services">
           <motion.section
@@ -526,25 +544,17 @@ export default function Home() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="py-20 text-center"
+            className="py-20 text-center px-4 sm:px-6 lg:px-8"
           >
             <Services darkMode={darkMode} />
           </motion.section>
         </Element>
 
-        {/* Skills Section */}
-        <Element name="skills">
-          <motion.section
-            id="skills"
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="py-20 text-center"
-          >
-            <Skills darkMode={darkMode} />
-          </motion.section>
-        </Element>
+        
+
+
+
+
 
         {/* Projects Section - Updated with auto-scrolling carousel */}
         <Element name="projects">

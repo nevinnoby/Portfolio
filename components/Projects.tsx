@@ -12,14 +12,14 @@ const projects = [
 
 const Projects = ({ isDark }: { isDark: boolean }) => {
   return (
-    <div className="">
+    <div className="px-4 md:px-8 lg:px-16">
       <h2 className={`text-4xl font-bold text-center mb-8 ${isDark ? "text-white" : "text-black"}`}>
         My Projects
       </h2>
 
       {/* Marquee Effect */}
       <motion.div
-        className="flex space-x-10"
+        className="flex space-x-6 md:space-x-10 overflow-hidden"
         animate={{
           x: ["0%", "-100%"], // Moves left infinitely
         }}
@@ -32,14 +32,14 @@ const Projects = ({ isDark }: { isDark: boolean }) => {
         {[...projects, ...projects].map((project, index) => (
           <motion.div
             key={index}
-            className="min-w-[700px] md:min-w-[800px] lg:min-w-[900px] bg-white p-6 shadow-lg rounded-xl transform hover:scale-105 transition-transform duration-300"
+            className="min-w-[300px] sm:min-w-[500px] md:min-w-[700px] lg:min-w-[900px] bg-white p-4 sm:p-6 shadow-lg rounded-xl transform hover:scale-105 transition-transform duration-300"
           >
             <img
               src={project.image}
               alt={project.title}
-              className="w-full h-[400px] object-cover rounded-lg"
+              className="w-full h-[200px] sm:h-[300px] md:h-[400px] object-cover rounded-lg"
             />
-            <h3 className="text-2xl font-semibold mt-4 text-center">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mt-4 text-center">
               {project.title}
             </h3>
           </motion.div>

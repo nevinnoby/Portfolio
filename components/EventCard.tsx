@@ -206,7 +206,7 @@ const EventCard = ({ darkMode = true }) => {
   return (
     <motion.div
       ref={cardRef}
-      className={`relative w-full h-72 cursor-pointer rounded-2xl overflow-hidden shadow-2xl group ${darkMode ? "shadow-black/30" : "shadow-indigo-900/20"}`}
+      className={`relative w-full h-72 md:h-96 lg:h-[28rem] cursor-pointer rounded-2xl overflow-hidden shadow-2xl group ${darkMode ? "shadow-black/30" : "shadow-indigo-900/20"}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
@@ -297,7 +297,7 @@ const EventCard = ({ darkMode = true }) => {
       </div>
       
       {/* Content container with improved effects */}
-      <div className="relative z-10 h-full flex flex-col justify-between p-6">
+      <div className="relative z-10 h-full flex flex-col justify-between p-4 md:p-6 lg:p-8">
         {/* Animated badge effect */}
         <div>
           <motion.div 
@@ -355,9 +355,9 @@ FutureScape was a tech event featuring MCQs, blind coding, debugging, and a trea
 </motion.p>
         </div>
         
-        <div className="flex justify-between items-end">
+        <div className="flex flex-col md:flex-row justify-between items-end">
           <motion.div 
-            className="flex space-x-5"
+            className="flex space-x-5 mb-4 md:mb-0"
             animate={{ y: isHovered ? -2 : 0 }}
             transition={{ duration: 0.3 }}
           >
