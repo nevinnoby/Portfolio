@@ -125,7 +125,7 @@ const Cover = ({ darkMode }: CoverProps) => {
   };
 
   return (
-    <div ref={containerRef} className={`relative min-h-screen overflow-hidden ${darkMode ? "bg-gray-900 text-white" : "bg-gray-950 text-black"}`}>
+    <div ref={containerRef} className={`relative min-h-screen overflow-hidden px-4 sm:px-6 lg:px-8 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-950 text-black"}`}>
       {/* Dark gradient overlay */}
       <div
         className={`absolute inset-0 ${
@@ -210,9 +210,9 @@ const Cover = ({ darkMode }: CoverProps) => {
 
         <div className="flex flex-col md:flex-row items-center justify-between my-auto pt-12 md:pt-0">
           {/* Left side content */}
-          <div className="w-full md:w-1/2 mb-16 md:mb-0 z-10">
+          <div className="w-full md:w-1/2 mb-16 md:mb-0 z-10 text-center md:text-left">
           <motion.h1
-  className={`text-5xl md:text-7xl font-bold mb-6 leading-tight ${
+  className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight ${
     darkMode
       ? "bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400"
       : "bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600"
@@ -268,16 +268,15 @@ const Cover = ({ darkMode }: CoverProps) => {
             <motion.div
               variants={itemVariants}
               whileHover={{ scale: 1.03 }}
+              className="inline-flex items-center px-3 py-1 rounded-full bg-blue-900/20 border border-blue-700/20 backdrop-blur-sm mb-6"
             >
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-900/20 border border-blue-700/20 backdrop-blur-sm mb-6">
-                <div className="w-2 h-2 rounded-full bg-blue-400 mr-2 animate-pulse"></div>
-                <span className="text-sm font-medium text-blue-300">Full Stack Developer</span>
-              </div>
+              <div className="w-2 h-2 rounded-full bg-blue-400 mr-2 animate-pulse"></div>
+              <span className="text-sm font-medium text-blue-300">Full Stack Developer</span>
             </motion.div>
             
             <motion.p
               variants={itemVariants}
-              className={`text-lg ${darkMode ? "text-gray-300" : "text-gray-500"} mb-8 max-w-lg text-center`}
+              className={`text-base sm:text-lg md:text-xl ${darkMode ? "text-gray-300" : "text-gray-500"} mb-8 max-w-lg mx-auto md:mx-0`}
             >
               Creating cutting-edge web experiences with modern technologies. Passionate about clean code, intuitive interfaces, and innovative solutions.
             </motion.p>
@@ -285,9 +284,9 @@ const Cover = ({ darkMode }: CoverProps) => {
             {/* Tech pills with glitch effect */}
             <motion.div 
               variants={itemVariants}
-              className="flex flex-wrap gap-2 mb-8"
+              className="flex flex-wrap gap-2 mb-8 justify-center md:justify-start"
             >
-              {["React", "Node.js", "MongoDB", "TypeScript", "Next.js"].map((tech, index) => (
+              {["React", "Next.js", "Firebase", "TypeScript", "Python", "PHP", "JavaScript"].map((tech, index) => (
                 <motion.span
                   key={index}
                   variants={glitchVariants}
@@ -303,12 +302,12 @@ const Cover = ({ darkMode }: CoverProps) => {
             
             <motion.div
               variants={itemVariants}
-              className="flex flex-wrap gap-4 mb-12"
+              className="flex flex-wrap gap-4 mb-12 justify-center md:justify-start"
             ><Link href="/Showcase">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`flex items-center gap-2 px-8 py-3 rounded-lg font-medium shadow-lg transition-all duration-300 ${darkMode ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white" : "bg-gradient-to-r from-blue-600 to-purple-700 text-white"}`}
+                className={`flex items-center gap-2 px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-medium shadow-lg transition-all duration-300 ${darkMode ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white" : "bg-gradient-to-r from-blue-600 to-purple-700 text-white"}`}
               >
                 
                      
@@ -362,7 +361,7 @@ const Cover = ({ darkMode }: CoverProps) => {
             <motion.div 
               style={{ 
                 perspective: '1000px',
-                transform: `rotateY(${mousePosition.x * 10}deg) rotateX(${-mousePosition.y * 10}deg)`,
+                // transform: `rotateY(${mousePosition.x * 10}deg) rotateX(${-mousePosition.y * 10}deg)`,
               }}
               className="relative z-10"
             >
@@ -384,7 +383,7 @@ const Cover = ({ darkMode }: CoverProps) => {
                   delay: 0.8,
                   duration: 0.8,
                 }}
-                className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden ring-1 ring-blue-500/20 backdrop-blur-sm"
+                className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full overflow-hidden ring-1 ring-blue-500/20 backdrop-blur-sm"
                 style={{
                   background: 'linear-gradient(45deg, rgba(30, 64, 175, 0.2), rgba(109, 40, 217, 0.2))',
                 }}
@@ -399,10 +398,10 @@ const Cover = ({ darkMode }: CoverProps) => {
                   />
                 </div>
                 
-                {/* Animated border effect */}
+                {/* Adjust the rotation animation to reset properly */}
                 <motion.div
                   animate={{ 
-                    rotate: 360,
+                    rotate: [0, 360], // Ensure rotation starts and ends at 0 degrees
                   }}
                   transition={{ 
                     duration: 20, 
