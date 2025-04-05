@@ -232,7 +232,7 @@ export default function Home() {
   // Track active section
   const handleScroll = useCallback(() => {
     setIsScrolling(true);
-    const sections = ["about", "services", "skills", "projects", "github", "contact"]; // Updated order
+    const sections = ["about", "skills", "services", "projects", "github", "contact"]; // Updated order
 
     for (const section of sections) {
       const element = document.getElementById(section);
@@ -337,7 +337,7 @@ export default function Home() {
           <div className="hidden md:flex items-center space-x-6 backdrop-blur-md bg-opacity-70 bg-transparent rounded-lg px-4 py-2">
             <nav>
               <ul className="flex space-x-6">
-                {["About", "Services", "Skills", "Projects", "GitHub", "Contact"].map((item) => (
+                {["About", "Skills", "Services", "Projects", "GitHub", "Contact"].map((item) => (
                   <li key={item}>
                     {item === "Projects" ? (
                       <Link legacyBehavior href="/Showcase">
@@ -455,7 +455,7 @@ export default function Home() {
             >
               <nav className="container mx-auto p-4">
                 <ul className="flex flex-col space-y-4">
-                  {["About", "Services", "Skills", "Projects", "GitHub", "Contact"].map((item) => (
+                  {["About", "Skills", "Services", "Projects", "GitHub", "Contact"].map((item) => (
                     <li key={item}>
                       <ScrollLink
                         to={item.toLowerCase()}
