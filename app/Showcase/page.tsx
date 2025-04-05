@@ -46,7 +46,7 @@ export default function Dashboard() {
       id: 1,
       title: "Servelink",
       description: "A full-stack online volunteering platform  with React and Node.js",
-      image: "/media/ser1.png",
+      image: "/media/se1.jpg",
       tags: ["React", "Node.js", "MongoDB","Express"],
       featured: true,
       github: "https://github.com/nevinnoby/servelink",

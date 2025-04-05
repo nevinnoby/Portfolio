@@ -29,7 +29,7 @@ const Projects = ({ isDark }: ProjectsProps) => {
       id: 1,
       title: "ServeLink",
       description: "Servelink is a MERN stack-based platform connecting volunteers with organizations. Volunteers can register, explore opportunities, and enroll, while organizations post activities and manage participants, fostering community engagement and social impact. 🚀",
-      image: "/media/S1.png", // Update with your actual image path
+      image: "/media/se1.jpg", // Update with your actual image path
       tags: ["React", "Node.js", "MongoDB", "Express"],
       link: "#",
       github: "#",
